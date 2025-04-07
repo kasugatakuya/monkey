@@ -13,24 +13,21 @@ export const metadata: Metadata = {
     "MONKEY, monkey, monkeyband, monkey_band, monkey_band_official, monkey_official, monkey_official_website, monkey_website, monkey_homepage, モンキー, モンキー公式サイト, バンド, ロック, パンク, パンクロック, ロックバンド, 曲, LIVE, 作曲, ギター, ベース, ドラム, 音楽, アルバム, ホームページ, 音楽バンド",
 
   // metadataBaseを追加
-  // TODO: URLを追加
-  // metadataBase: new URL("https://portfolio-rose-tau-96.vercel.app"),
+  metadataBase: new URL("https://monkey-mauve-alpha.vercel.app/news"),
 
   openGraph: {
     title: "MONKEY | パンクロックバンド",
     description:
       "パンクロックバンドMONKEYの公式サイトです。MONKEYに関する、ニュース、ライブスケジュール、楽曲、メンバー紹介、グッズなどご覧いただけます。",
     type: "website",
-    // TODO: URLを追加
-    // url: "https://portfolio-rose-tau-96.vercel.app",
+    url: "https://monkey-mauve-alpha.vercel.app/news",
     siteName: "MONKEY", // サイト名を追加
     locale: "ja_JP", // 日本語ロケールを追加
   },
 
   // canonicalを追加
   alternates: {
-    // TODO: URLを追加
-    // canonical: "https://portfolio-rose-tau-96.vercel.app",
+    canonical: "https://monkey-mauve-alpha.vercel.app/news",
   },
 
   // robotsを追加
@@ -56,10 +53,9 @@ export const metadata: Metadata = {
 
   // verification を追加（Google Search Consoleを使用している場合）
   // Google Search Console の設定→所有権の確認→HTMLタグのコードのcontent属性の値を指定
-  // TODO:  Google Search Console の設定を追加
-  // verification: {
-  //   google: "r4vs5K6kyRpFbT2eQ3xlFxlQbUmRrk_8z6irkNv4HmM",
-  // },
+  verification: {
+    google: "r4vs5K6kyRpFbT2eQ3xlFxlQbUmRrk_8z6irkNv4HmM",
+  },
 };
 
 export default function RootLayout({
