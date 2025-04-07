@@ -52,7 +52,6 @@ export const metadata: Metadata = {
   },
 
   // verification を追加（Google Search Consoleを使用している場合）
-  // Google Search Console の設定→所有権の確認→HTMLタグのコードのcontent属性の値を指定
   verification: {
     google: "r4vs5K6kyRpFbT2eQ3xlFxlQbUmRrk_8z6irkNv4HmM",
   },
@@ -66,51 +65,100 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={inter.className}>
-        <header className="fixed top-0 w-full">
+        <header className="fixed top-0 w-full z-50">
           <nav
-            className="flex items-center justify-between px-6 py-2 lg:px-20 lg:py-6"
+            className="flex items-center justify-between px-6 py-3 lg:px-20 lg:py-4"
             aria-label="Global"
           >
             {/* バンド名（ロゴ）をヘッダー左側に配置 */}
             <div className="flex-shrink-0">
-              <Link href="/" className="font-bold text-xl lg:text-2xl">
+              <Link
+                href="/"
+                className="font-bold text-2xl lg:text-3xl text-distressed"
+              >
                 MONKEY
               </Link>
             </div>
             {/* ナビゲーションメニューは右側に配置 */}
-            <div className="flex">
-              <Link href="/news" className="font-bold">
-                <div className="lg:text-xl"> NEWS</div>
+            <div className="hidden md:flex text-distressed">
+              <Link href="/news" className="font-bold transform hover:rotate-1">
+                <div className="lg:text-xl text-accent"> NEWS</div>
                 <div className="text-xs">ニュース</div>
               </Link>
-              <Link href="/live" className="px-4 font-bold lg:px-12">
-                <div className="lg:text-xl"> LIVE</div>
+              <Link
+                href="/live"
+                className="px-4 font-bold lg:px-12 transform hover:rotate-1"
+              >
+                <div className="lg:text-xl text-accent"> LIVE</div>
                 <div className="text-xs">ライブスケジュール</div>
               </Link>
-              <Link href="/music" className="font-bold">
-                <div className="lg:text-xl"> MUSIC</div>
+              <Link
+                href="/music"
+                className="font-bold transform hover:rotate-1"
+              >
+                <div className="lg:text-xl text-accent"> MUSIC</div>
                 <div className="text-xs">楽曲</div>
               </Link>
-              <Link href="/member" className="px-4 font-bold lg:px-12">
-                <div className="lg:text-xl"> MEMBER</div>
+              <Link
+                href="/member"
+                className="px-4 font-bold lg:px-12 transform hover:rotate-1"
+              >
+                <div className="lg:text-xl text-accent"> MEMBER</div>
                 <div className="text-xs">メンバー</div>
               </Link>
-              {/* <Link href="/contact" className="font-bold">
-                <div className="lg:text-xl"> MERCHANDISE</div>
+              {/* <Link
+                href="/merch"
+                className="font-bold transform hover:rotate-1"
+              >
+                <div className="lg:text-xl text-accent"> MERCH</div>
                 <div className="text-xs">グッズ</div>
               </Link> */}
-              {/* <Link href="/contact" className="font-bold lg:pl-12">
-                <div className="lg:text-xl"> CONTACT</div>
-                <div className="text-xs">お問合せ</div>
+              {/* <Link
+                href="/merch"
+                className="font-bold transform hover:rotate-1"
+              >
+                <div className="lg:text-xl text-accent"> CONTACT</div>
+                <div className="text-xs">問い合わせ</div>
               </Link> */}
+            </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button className="btn-punk text-sm py-1 px-3">MENU</button>
             </div>
           </nav>
         </header>
 
-        {children}
+        <div className="pt-16 md:pt-24">
+          {" "}
+          {/* Padding to account for fixed header */}
+          {children}
+        </div>
 
-        <footer className="text-md py-20 text-center">
-          <p>© MONKEY 2024-{new Date().getFullYear()}</p>
+        <footer className="text-md py-20 text-center angled-border">
+          <div className="punk-section mx-auto max-w-md p-6 mb-8">
+            <div className="text-2xl text-distressed text-accent mb-4">
+              FOLLOW THE CHAOS
+            </div>
+            <div className="flex justify-center space-x-8 mb-6">
+              <a href="#" className="text-2xl">
+                📱
+              </a>
+              <a href="#" className="text-2xl">
+                🎵
+              </a>
+              <a href="#" className="text-2xl">
+                📸
+              </a>
+              <a href="#" className="text-2xl">
+                🎬
+              </a>
+            </div>
+          </div>
+          <p>
+            © MONKEY {new Date().getFullYear()} |{" "}
+            <span className="text-accent">NO RULES. JUST NOISE.</span>
+          </p>
         </footer>
       </body>
     </html>
