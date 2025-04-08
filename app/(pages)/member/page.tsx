@@ -16,7 +16,7 @@ export default function Member() {
           {/* パンクスタイルのメインタイトル - 中央揃え */}
           <div className="text-5xl text-center relative z-10">MEMBER</div>
           <div className="flex justify-center relative z-10">
-            <div className="text-xl text-center">メンバー</div>
+            <div className="text-xl text-center">バンドメンバー</div>
           </div>
 
           {/* CTAボタン */}
@@ -32,7 +32,7 @@ export default function Member() {
           {/* モバイル用スタイル - PCと同じデザインに */}
           <div className="text-4xl text-center relative z-10">MEMBER</div>
           <div className="flex justify-center relative z-10">
-            <div className="text-base text-center">メンバー</div>
+            <div className="text-base text-center">バンドメンバー</div>
           </div>
 
           {/* モバイル用ボタン */}

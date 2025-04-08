@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Link from "next/link";
 import "./globals.css";
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -65,98 +66,16 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={inter.className}>
-        <header className="fixed top-0 w-full z-50">
-          <nav
-            className="flex items-center justify-between px-6 py-3 lg:px-20 lg:py-4"
-            aria-label="Global"
-          >
-            {/* バンド名（ロゴ）をヘッダー左側に配置 */}
-            <div className="flex-shrink-0">
-              <Link
-                href="/"
-                className="header-logo font-bold text-2xl lg:text-3xl"
-              >
-                MONKEY
-              </Link>
-            </div>
-            {/* ナビゲーションメニューは右側に配置 */}
-            <div className="hidden md:flex text-distressed">
-              <Link href="/news" className="font-bold transform hover:rotate-1">
-                <div className="lg:text-xl text-accent"> NEWS</div>
-                <div className="text-xs">ニュース</div>
-              </Link>
-              <Link
-                href="/live"
-                className="px-4 font-bold lg:px-12 transform hover:rotate-1"
-              >
-                <div className="lg:text-xl text-accent"> LIVE</div>
-                <div className="text-xs">ライブスケジュール</div>
-              </Link>
-              <Link
-                href="/music"
-                className="font-bold transform hover:rotate-1"
-              >
-                <div className="lg:text-xl text-accent"> MUSIC</div>
-                <div className="text-xs">楽曲</div>
-              </Link>
-              <Link
-                href="/member"
-                className="px-4 font-bold lg:px-12 transform hover:rotate-1"
-              >
-                <div className="lg:text-xl text-accent"> MEMBER</div>
-                <div className="text-xs">メンバー</div>
-              </Link>
-              {/* <Link
-                href="/merch"
-                className="font-bold transform hover:rotate-1"
-              >
-                <div className="lg:text-xl text-accent"> MERCH</div>
-                <div className="text-xs">グッズ</div>
-              </Link> */}
-              {/* <Link
-                href="/merch"
-                className="font-bold transform hover:rotate-1"
-              >
-                <div className="lg:text-xl text-accent"> CONTACT</div>
-                <div className="text-xs">問い合わせ</div>
-              </Link> */}
-            </div>
-
-            {/* Mobile menu button */}
-            <div className="md:hidden">
-              <button className="btn-punk text-sm py-1 px-3">MENU</button>
-            </div>
-          </nav>
-        </header>
+        {/* ヘッダーコンポーネント */}
+        <Header />
 
         <div className="pt-16 md:pt-24">
-          {" "}
           {/* Padding to account for fixed header */}
           {children}
         </div>
 
-        <footer className="text-md py-20 text-center angled-border">
-          <div className="punk-section mx-auto max-w-md p-6 mb-8">
-            <div className="text-2xl text-distressed text-accent mb-4">
-              FOLLOW THE CHAOS
-            </div>
-            <div className="flex justify-center space-x-8 mb-6">
-              <a href="#" className="text-2xl">
-                📱
-              </a>
-              <a href="#" className="text-2xl">
-                🎵
-              </a>
-              <a href="#" className="text-2xl">
-                📸
-              </a>
-              <a href="#" className="text-2xl">
-                🎬
-              </a>
-            </div>
-          </div>
-          <p>© MONKEY 2024 - 2025</p>
-        </footer>
+        {/* フッターコンポーネント */}
+        <Footer />
       </body>
     </html>
   );
