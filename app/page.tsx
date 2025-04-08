@@ -21,36 +21,32 @@ export default function Home() {
           {/* CTAボタン */}
           <div className="mt-12 z-10">
             <a href="/live" className="btn-punk">
-              UPCOMING SHOWS
+              ライブスケジュール
             </a>
           </div>
         </div>
 
         {/* モバイル用コンテンツ (md未満) */}
         <div className="absolute inset-0 flex md:hidden flex-col items-center justify-center -mt-14">
-          {/* モバイル用スタイル */}
-          <div className="text-4xl text-center relative z-10 text-accent font-bold transform -skew-x-6 uppercase tracking-tighter">
-            MONKEY
-          </div>
-          <div className="flex justify-center relative z-10 mt-3">
-            <div className="text-base text-center bg-secondary text-black font-bold px-3 py-1 transform rotate-2 tracking-wider shadow-md">
-              パンクロックバンド
-            </div>
+          {/* モバイル用スタイル - PCと同じデザインに */}
+          <div className="text-4xl text-center relative z-10">MONKEY</div>
+          <div className="flex justify-center relative z-10">
+            <div className="text-base text-center">パンクロックバンド</div>
           </div>
 
           {/* モバイル用ボタン */}
           <div className="mt-8 z-10">
             <a href="/live" className="btn-punk text-sm">
-              UPCOMING SHOWS
+              ライブスケジュール
             </a>
           </div>
         </div>
       </div>
 
-      {/* 最新リリースセクション */}
+      {/* 最新リリース */}
       <section className="punk-section p-8 mb-20">
         <h2 className="text-3xl font-bold text-distressed text-accent mb-6">
-          LATEST RELEASE
+          最新リリース
         </h2>
         <div className="md:flex items-center">
           <div className="md:w-1/2 p-4">
@@ -59,83 +55,70 @@ export default function Home() {
               <div className="absolute inset-0 border-2 border-accent transform rotate-2"></div>
               <div className="absolute inset-0 bg-black flex items-center justify-center transform -rotate-1">
                 <span className="text-4xl font-bold text-distressed">
-                  NEW ALBUM
+                  近日公開予定
                 </span>
               </div>
             </div>
           </div>
           <div className="md:w-1/2 p-4">
             <h3 className="text-2xl font-bold text-secondary mb-2">
-              CHAOS THEORY
+              タイトル未定
             </h3>
-            <p className="mb-4">OUT NOW ON ALL PLATFORMS</p>
             <ul className="space-y-2 mb-6">
               <li className="flex items-center">
-                <span className="text-accent mr-2">01.</span> Riot Season
+                <span className="text-accent mr-2">01.</span> MONKEYのテーマ(仮)
               </li>
               <li className="flex items-center">
-                <span className="text-accent mr-2">02.</span> Electric Anarchy
+                <span className="text-accent mr-2">02.</span>
+                パンクノットデッド(仮)
               </li>
               <li className="flex items-center">
-                <span className="text-accent mr-2">03.</span> Tokyo Nights
+                <span className="text-accent mr-2">03.</span> 役人ファック(仮)
               </li>
               <li className="flex items-center">
-                <span className="text-accent mr-2">04.</span> Generation Zero
+                <span className="text-accent mr-2">04.</span> 始まりのうた(仮)
               </li>
               <li className="flex items-center">
-                <span className="text-accent mr-2">05.</span> Concrete Jungle
+                <span className="text-accent mr-2">05.</span> あっちいけ(仮)
+              </li>
+              <li className="flex items-center">
+                <span className="text-accent mr-2">06.</span> 激情(仮)
               </li>
             </ul>
             <a href="/music" className="btn-punk">
-              LISTEN NOW
+              全ての楽曲
             </a>
           </div>
         </div>
       </section>
 
-      {/* ツアー日程のティーザー */}
+      {/* ライブスケジュール */}
       <section className="torn-edge bg-accent text-black p-8 mb-20">
-        <h2 className="text-3xl font-bold mb-6">ON TOUR</h2>
+        <h2 className="text-3xl font-bold mb-6">ライブスケジュール</h2>
         <div className="space-y-4 mb-6">
-          <div className="flex justify-between">
-            <span className="font-bold">APR 15</span>
-            <span>TOKYO - LIQUIDROOM</span>
-            <span className="hidden md:block">TICKETS</span>
+          {/* スマホでは縦表示、PCでは横表示 */}
+          <div className="md:flex md:justify-between md:flex-wrap block space-y-2 md:space-y-0">
+            <span className="font-bold block md:inline">2025/04/13(日)</span>
+            <span className="block md:inline">
+              東京 - 武蔵境STATTO 「武蔵野CITYNIGHT」
+            </span>
+            <span className="block md:inline">チケット発売中</span>
           </div>
-          <div className="flex justify-between">
-            <span className="font-bold">APR 22</span>
-            <span>OSAKA - BIGCAT</span>
-            <span className="hidden md:block">SOLD OUT</span>
+          <div className="md:flex md:justify-between block space-y-2 md:space-y-0">
+            <span className="font-bold block md:inline">公演日未定</span>
+            <span className="block md:inline">会場未定</span>
+            <span className="block md:inline">チケット未定</span>
           </div>
-          <div className="flex justify-between">
-            <span className="font-bold">APR 29</span>
-            <span>NAGOYA - DIAMOND HALL</span>
-            <span className="hidden md:block">TICKETS</span>
+          <div className="md:flex md:justify-between block space-y-2 md:space-y-0">
+            <span className="font-bold block md:inline">公演日未定</span>
+            <span className="block md:inline">会場未定</span>
+            <span className="block md:inline">チケット未定</span>
           </div>
         </div>
         <div className="text-center">
           <a href="/live" className="btn-punk bg-black text-white">
-            ALL DATES
+            全てのライブスケジュール
           </a>
-        </div>
-      </section>
-
-      {/* ニュースレター登録 */}
-      <section className="punk-section p-8 mb-20">
-        <h2 className="text-3xl font-bold text-distressed text-accent mb-6">
-          JOIN THE RIOT
-        </h2>
-        <p className="mb-6">
-          Get exclusive access to ticket pre-sales, new music drops, and
-          behind-the-scenes chaos.
-        </p>
-        <div className="flex flex-col md:flex-row gap-4">
-          <input
-            type="email"
-            placeholder="YOUR EMAIL"
-            className="bg-black border-2 border-accent p-3 w-full md:w-2/3"
-          />
-          <button className="btn-punk md:w-1/3">SUBSCRIBE</button>
         </div>
       </section>
     </main>

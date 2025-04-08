@@ -74,7 +74,7 @@ export default function RootLayout({
             <div className="flex-shrink-0">
               <Link
                 href="/"
-                className="font-bold text-2xl lg:text-3xl text-distressed"
+                className="header-logo font-bold text-2xl lg:text-3xl"
               >
                 MONKEY
               </Link>
@@ -155,10 +155,7 @@ export default function RootLayout({
               </a>
             </div>
           </div>
-          <p>
-            © MONKEY {new Date().getFullYear()} |{" "}
-            <span className="text-accent">NO RULES. JUST NOISE.</span>
-          </p>
+          <p>© MONKEY 2024 - 2025</p>
         </footer>
       </body>
     </html>

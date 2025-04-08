@@ -121,12 +121,13 @@ nav {
   text-transform: uppercase; /* 大文字に変換 */
 }
 
-nav a {
+/* ヘッダーロゴを除外するためのセレクタ修正 */
+nav a:not(.header-logo) {
   position: relative;
   overflow: hidden;
 }
 
-nav a::after {
+nav a:not(.header-logo)::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -138,7 +139,7 @@ nav a::after {
   transition: transform 0.3s ease;
 }
 
-nav a:hover::after {
+nav a:not(.header-logo):hover::after {
   transform: translateX(0); /* ホバー時にアンダーラインを表示 */
 }
 
@@ -196,7 +197,8 @@ footer {
 }
 
 /* バンドタイトルのスタイリング */
-.title .text-5xl {
+.title .text-5xl,
+.title .text-4xl {
   font-size: 8rem;
   font-weight: 900;
   letter-spacing: -3px;
@@ -208,7 +210,24 @@ footer {
   line-height: 0.9;
 }
 
-.title .text-xl {
+/* ヘッダーロゴのスタイリング */
+.header-logo {
+  font-weight: 900;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  transform: skew(-5deg); /* タイトルを傾ける */
+  -webkit-text-stroke: 1px black; /* テキストの輪郭 */
+  text-shadow: 2px 2px 0 #000, 3px 3px 0 var(--dark-accent);
+}
+
+/* モバイル用のタイトルスタイリング - サイズのみ変更 */
+.title .text-4xl {
+  font-size: 4rem; /* モバイル向けに小さいサイズを維持 */
+}
+
+.title .text-xl,
+.title .text-base {
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 2px;
@@ -219,4 +238,9 @@ footer {
   transform: rotate(-2deg); /* 少し回転させる */
   margin-top: 20px;
   box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* モバイル用のサブタイトルのフォントサイズを調整 */
+.title .text-base {
+  font-size: 1rem; /* モバイル向けに小さいサイズを維持 */
 }
