@@ -1,6 +1,9 @@
 export default function Home() {
   return (
     <main className="mx-5 md:mx-20">
+      {/* 背景ノイズの追加 */}
+      <div className="bg-noise"></div>
+
       {/* ダメージ効果のあるヒーローセクション - ヘッダーを考慮して中央に配置 */}
       <div className="title flex min-h-screen flex-col items-center justify-center relative">
         {/* 装飾要素 */}

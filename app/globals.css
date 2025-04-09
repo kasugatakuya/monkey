@@ -37,10 +37,42 @@
 
 /* ボディ全体のスタイル */
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: "PunkFont", Arial, Helvetica, sans-serif;
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23222222' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); /* パターン背景 */
+  background-attachment: fixed;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* モバイルデバイス用の追加対策 */
+html,
+body {
+  background-color: var(--background);
+}
+
+/* SVGパターンの代替背景として、フォールバック用の点線グリッド */
+@supports not (background-image: url("data:image/svg+xml,%3Csvg...")) {
+  body:before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(
+        to right,
+        rgba(34, 34, 34, 0.15) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(34, 34, 34, 0.15) 1px, transparent 1px);
+    background-size: 15px 15px;
+    pointer-events: none;
+    z-index: -1;
+  }
 }
 
 /* ダメージテキストエフェクト */
@@ -243,4 +275,37 @@ footer {
 /* モバイル用のサブタイトルのフォントサイズを調整 */
 .title .text-base {
   font-size: 1rem; /* モバイル向けに小さいサイズを維持 */
+}
+
+/* 背景ノイズテクスチャ用のクラス */
+.bg-noise {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEcElEQVR4nO2aTW8bVRTHfyTGIlIQFS2bClJCQsKiYkEXCP0EdAMbJCTyIiA1C8SCVYkUUj5A2JS0lFIJCaUo3aAKKbQLtpAFVNDSvFhO8DTJNE7ieOzxZB4dQ8/IY894PHbsGaeTnOQfWT73nHvPueeee2ZehhIHgK+AzwLaZ8Dx8vJWNGPAZpkIaJvAZNl5K5gJYEvUxCbwxCOgHjJjwLaoiU1gvIIaUTUNTAHvA28Brym6ZgLYEjVRK9JTzQDfABkgDeSAHIZmXgc+Bx6q94+LGpivEDEjwA9ADvhP1YjQzBHgA4IbR9rjwEdAUvWhazAHvAKMKnFEhJiVv1kkYuJB4F0MVdK1kMZ4o+/WeqAMYawhCeCkaobG6UUgiqTuPAI/3KUmosAr3QqD64CRGJJvATNd9FVXVzO2BJ8Enlfv+4HVbo3UeZJ6Dw7BQWCumyEjjigKaRR4GeNAl8d4VTfQPMrHrQIPYlwqYsBvHpN3whjCkdiWGJh14DMFVqVQbVU8eaI3m9KHlqf9LGpkzGPyeeVADjjVK5faYaodzteBPeAIcAzjlmoEpPPKaB+4oIzmeWUsjKbCxMG23O+Sz8B6CJPuYxQS7YjKKpuLtf5d4EfgEBD3GBhVDh4Bbqt+riq6XwUOVpKoC/YWOD5YwbGQFSbBXvACvI7xOvDrzw3bZiKGK85znI6PswrsYSjmnjLtFNivOh5oFJrZxzhTqPcCgCbwe7E2nL4nMRJe3UqFmGVboW70F0VXJ2ZZ9vQn8rjocOC5UdvCk9oWnjAZ84dH3w3fbwz46eNiwydeJhvjmK2WVWqvtwq9Jh7+4qBQaPTFG1b5JJ0yZkZsaLBUZ1Vqd1SkfKPJ86nDRURMBFQ73ZItHLjXoC49v9V0rMM7TTKTX2V9OsHtWKLYAZ7qN4o9rmP97yS4LM+32Zy4wqPUUXaOTRaFXCcONGhZv5m+u8bM4lWWz1yhFo+TjScDLRFIkIvICpYV5wqp5Rf5Z/psMW9s54oFsOfrTmOWZZUKQpZl01ja5J+XX+TWWIF8LMHtkxeLwtvTxeOulkDxuQGdY4F28iD/njrLrUgcgMerPwOnHiQUyA+vGLgImTHOPV+YgV8WJkCIiwiXYosWttGkiIieCxqoiHCKCgn8q1rQ/UO3+DxYIvJPLpfx6JZDzJ/xWA+W5WNHGFfJKbZSVQs70i98C7mII/d9JjHWQUZsgZ+h+EUMsYAIYPn+3qUQQYg4NpWrGw1VXt5oXsR2LUAtiwhCxNazriRb1oPHn7yJf3o5qcF5lRcihIiTGhrmFnpCiBUoJALy12c9+BrUQlVLzd83vWdVK+RCTChE/L/Sz5DlU9WChUi0OsqlCYnf9KNTYmLOzZ5uxbyHHQlCYk5PQLUJnRGJt+kLmQiBiHe0sESIRJy3+Bt0TsR74KlrUK6qEYRDgJDWW4XQQ61qwHT/g9SThqA5BTDZ/SD1pHGQmNQfpD5KHybMDOqDNMAhHuD4Pwj7hP8BZwY+JY9QbZoAAAAASUVORK5CYII=");
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.05;
+}
+
+/* iOSデバイス向けの特別な修正 */
+@supports (-webkit-touch-callout: none) {
+  body {
+    background-color: var(--background);
+    background-attachment: scroll;
+  }
+
+  /* iOS向けの代替背景 */
+  body:before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23222222' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    z-index: -1;
+  }
 }
