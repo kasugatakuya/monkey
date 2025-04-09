@@ -309,3 +309,25 @@ footer {
     z-index: -1;
   }
 }
+
+/* ライブスケジュールセクションのデフォルト（ライトモード）スタイル */
+.live-schedule-section {
+  color: #000; /* デフォルトは黒色テキスト */
+}
+
+.live-schedule-section h2,
+.live-schedule-section .dark-mode-text {
+  color: #000; /* デフォルトは黒色テキスト */
+}
+
+/* ダークモードでのテキスト色変更 */
+@media (prefers-color-scheme: dark) {
+  .live-schedule-section {
+    color: var(--foreground); /* ダークモードでは前景色（白色）を使用 */
+  }
+
+  .live-schedule-section h2,
+  .live-schedule-section .dark-mode-text {
+    color: var(--foreground); /* ヘッダーとテキストも前景色に変更 */
+  }
+}
