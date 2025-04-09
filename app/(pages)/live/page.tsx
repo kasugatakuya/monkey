@@ -46,9 +46,11 @@ export default function Live() {
       </div>
 
       {/* ライブスケジュール */}
-      <section className="torn-edge bg-accent text-black p-8 mb-20">
-        <h2 className="text-3xl font-bold mb-6">ライブスケジュール</h2>
-        <div className="space-y-4 mb-6">
+      <section className="torn-edge bg-accent p-8 mb-20">
+        <h2 className="text-3xl font-bold mb-6 text-black">
+          ライブスケジュール
+        </h2>
+        <div className="space-y-4 mb-6 text-black">
           {/* スマホでは縦表示、PCでは横表示 */}
           <div className="md:flex md:justify-between md:flex-wrap block space-y-2 md:space-y-0">
             <span className="font-bold block md:inline">2025/04/13(日)</span>
