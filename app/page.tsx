@@ -4,7 +4,7 @@ export default function Home() {
       {/* 背景ノイズの追加 */}
       <div className="bg-noise"></div>
 
-      {/* ダメージ効果のあるヒーローセクション - ヘッダーを考慮して中央に配置 */}
+      {/* ダメージ効果のあるヒーローセクション - スマホの下部メニューを考慮して調整 */}
       <div className="title flex min-h-screen flex-col items-center justify-center relative">
         {/* 装飾要素 */}
         <div className="absolute top-1/4 left-10 w-20 h-20 border-4 border-accent opacity-30 rotate-12"></div>
@@ -29,9 +29,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* モバイル用コンテンツ (md未満) */}
-        <div className="absolute inset-0 flex md:hidden flex-col items-center justify-center -mt-14">
-          {/* モバイル用スタイル - PCと同じデザインに */}
+        {/* モバイル用コンテンツ (md未満) - スマホのブラウザ下部メニュー考慮 */}
+        <div className="absolute inset-0 flex md:hidden flex-col items-center justify-center -translate-y-8">
+          {/* モバイル用スタイル - スマホ表示の中央位置を上に調整 */}
           <div className="text-4xl text-center relative z-10">MONKEY</div>
           <div className="flex justify-center relative z-10">
             <div className="text-base text-center">パンクロックバンド</div>

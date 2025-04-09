@@ -28,7 +28,7 @@ export default function Member() {
         </div>
 
         {/* モバイル用コンテンツ (md未満) */}
-        <div className="absolute inset-0 flex md:hidden flex-col items-center justify-center -mt-14">
+        <div className="absolute inset-0 flex md:hidden flex-col items-center justify-center-translate-y-8">
           {/* モバイル用スタイル - PCと同じデザインに */}
           <div className="text-4xl text-center relative z-10">MEMBER</div>
           <div className="flex justify-center relative z-10">
