@@ -62,7 +62,7 @@ export default async function Test() {
 
       {/* スプレッドシートデータ表示セクション */}
       <section className="p-8 mb-12">
-        <h2 className="text-3xl font-bold mb-6">Google Sheetsのデータ</h2>
+        <h2 className="text-3xl font-bold mb-6">Google Sheetsのデータです</h2>
 
         {data.length > 0 ? (
           <div className="overflow-x-auto">
