@@ -1,10 +1,22 @@
 import Link from "next/link";
 import { getAllSheetData, formatSheetData } from "@/utils/googleSheets";
 
+// キャッシュを無効化し、毎回のリクエストで再検証
+export const revalidate = 0;
+
 // サーバーコンポーネントでのデータ取得
 async function getSheetData() {
   try {
+    console.log("シートデータを取得中..."); // デバッグログ
+    const timestamp = new Date().toISOString(); // タイムスタンプを追加
+    console.log("データ取得開始時間:", timestamp);
+
     const sheetData = await getAllSheetData();
+    console.log(
+      "取得したデータ:",
+      JSON.stringify(sheetData).substring(0, 200) + "..."
+    ); // 一部を表示
+
     return formatSheetData(sheetData);
   } catch (error) {
     console.error("データ取得エラー:", error);
@@ -62,7 +74,10 @@ export default async function Test() {
 
       {/* スプレッドシートデータ表示セクション */}
       <section className="p-8 mb-12">
-        <h2 className="text-3xl font-bold mb-6">Google Sheetsのデータです</h2>
+        <h2 className="text-3xl font-bold mb-6">Google Sheetsのデータ</h2>
+        <p className="text-sm text-gray-500 mb-4">
+          最終更新: {new Date().toLocaleString()}
+        </p>
 
         {data.length > 0 ? (
           <div className="overflow-x-auto">
