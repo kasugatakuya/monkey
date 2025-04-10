@@ -41,6 +41,13 @@ export default function Header() {
             <div className="text-xs">バンドメンバー</div>
           </Link>
           {/* <Link
+            href="/test"
+            className="px-4 font-bold transform hover:rotate-1"
+          >
+            <div className="lg:text-xl text-accent"> TEST</div>
+            <div className="text-xs">テスト</div>
+          </Link> */}
+          {/* <Link
             href="/merch"
             className="font-bold transform hover:rotate-1"
           >
