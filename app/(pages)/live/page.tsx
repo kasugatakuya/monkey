@@ -53,7 +53,15 @@ export default function Live() {
           <div className="md:flex md:justify-between md:flex-wrap block space-y-2 md:space-y-0">
             <span className="font-bold block md:inline">2025/04/13(日)</span>
             <span className="block md:inline">
-              東京 - 武蔵境STATTO 「武蔵野CITYNIGHT」
+              東京 - 武蔵境STATTO 「武蔵野CITYNIGHT」open18:00/start18:30&ensp;
+              <Link
+                href="https://www5.hp-ez.com/hp/statto/page176"
+                className="text-accent hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                公式サイト
+              </Link>
             </span>
             <span className="block md:inline">チケット発売中</span>
           </div>

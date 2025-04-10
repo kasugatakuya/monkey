@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <main className="mx-5 md:mx-20">
@@ -46,6 +48,98 @@ export default function Home() {
         </div>
       </div>
 
+      {/* ニュース */}
+      <section className=" p-8 mb-12">
+        <h2 className="text-3xl font-bold mb-6">ニュース</h2>
+
+        <article className="mb-12 border-l-4 border-accent pl-4">
+          <div className="flex items-center mb-3">
+            <time className="text-sm opacity-80">2025/04/10</time>
+          </div>
+          <h3 className="text-2xl font-bold mb-2">
+            武蔵野CITYNIGHTに出演決定!
+          </h3>
+          <p className="mb-4">
+            2025年4月13日(日)に東京都のライブハウス武蔵境STATTOで行われる「武蔵野CITYNIGHT」に出演します。
+          </p>
+          <ul>
+            <li className="mb-2">
+              日時: 2025年4月13日(日) open18:00/start18:30
+            </li>
+            <li className="mb-2">場所: 武蔵境STATTO</li>
+            <li className="mb-2">チケット: 前売り2400/ 当日2900 (+drink600)</li>
+            <li className="mb-2">
+              出演バンド: ①THE TELEPASHITS ②谷 洋平(SHAPEEN!!) ③えんぴつ2本
+              ④MONKEY ⑤きよ川 ⑥The.BLUE MOON
+            </li>
+          </ul>
+          <p className="mb-4">詳細は公式サイトをご覧ください。</p>
+          <Link
+            href="https://www5.hp-ez.com/hp/statto/page176"
+            className="text-accent hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            武蔵境STATTO公式サイト
+          </Link>
+        </article>
+
+        <article className="mb-12 border-l-4 border-accent pl-4">
+          <div className="flex items-center mb-3">
+            <time className="text-sm opacity-80">2025/04/09</time>
+          </div>
+          <h3 className="text-2xl font-bold mb-2">
+            公式ホームページがオープンしました!
+          </h3>
+          <p className="mb-4">
+            MONKEYの公式ホームページがオープンしました。今後ともよろしくお願いいたします。
+          </p>
+        </article>
+        <div className="text-center">
+          <a href="/news" className="btn-punk">
+            全てのニュース
+          </a>
+        </div>
+      </section>
+
+      {/* ライブスケジュール */}
+      <section className="torn-edge bg-accent p-8 mb-20 live-schedule-section">
+        <h2 className="text-3xl font-bold mb-6">ライブスケジュール</h2>
+        <div className="space-y-4 mb-6">
+          {/* スマホでは縦表示、PCでは横表示 */}
+          <div className="md:flex md:justify-between md:flex-wrap block space-y-2 md:space-y-0">
+            <span className="font-bold block md:inline">2025/04/13(日)</span>
+            <span className="block md:inline">
+              東京 - 武蔵境STATTO 「武蔵野CITYNIGHT」open18:00/start18:30&ensp;
+              <Link
+                href="https://www5.hp-ez.com/hp/statto/page176"
+                className="text-accent hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                公式サイト
+              </Link>
+            </span>
+            <span className="block md:inline">チケット発売中</span>
+          </div>
+          <div className="md:flex md:justify-between block space-y-2 md:space-y-0">
+            <span className="font-bold block md:inline">公演日未定</span>
+            <span className="block md:inline">会場未定</span>
+            <span className="block md:inline">チケット未定</span>
+          </div>
+          <div className="md:flex md:justify-between block space-y-2 md:space-y-0">
+            <span className="font-bold block md:inline">公演日未定</span>
+            <span className="block md:inline">会場未定</span>
+            <span className="block md:inline">チケット未定</span>
+          </div>
+        </div>
+        <div className="text-center">
+          <a href="/live" className="btn-punk bg-black text-foreground">
+            全てのライブスケジュール
+          </a>
+        </div>
+      </section>
+
       {/* 最新リリース */}
       <section className="punk-section p-8 mb-20">
         <h2 className="text-3xl font-bold text-distressed text-accent mb-6">
@@ -92,36 +186,6 @@ export default function Home() {
               全ての楽曲
             </a>
           </div>
-        </div>
-      </section>
-
-      {/* ライブスケジュール */}
-      <section className="torn-edge bg-accent p-8 mb-20 live-schedule-section">
-        <h2 className="text-3xl font-bold mb-6">ライブスケジュール</h2>
-        <div className="space-y-4 mb-6">
-          {/* スマホでは縦表示、PCでは横表示 */}
-          <div className="md:flex md:justify-between md:flex-wrap block space-y-2 md:space-y-0">
-            <span className="font-bold block md:inline">2025/04/13(日)</span>
-            <span className="block md:inline">
-              東京 - 武蔵境STATTO 「武蔵野CITYNIGHT」
-            </span>
-            <span className="block md:inline">チケット発売中</span>
-          </div>
-          <div className="md:flex md:justify-between block space-y-2 md:space-y-0">
-            <span className="font-bold block md:inline">公演日未定</span>
-            <span className="block md:inline">会場未定</span>
-            <span className="block md:inline">チケット未定</span>
-          </div>
-          <div className="md:flex md:justify-between block space-y-2 md:space-y-0">
-            <span className="font-bold block md:inline">公演日未定</span>
-            <span className="block md:inline">会場未定</span>
-            <span className="block md:inline">チケット未定</span>
-          </div>
-        </div>
-        <div className="text-center">
-          <a href="/live" className="btn-punk bg-black text-foreground">
-            全てのライブスケジュール
-          </a>
         </div>
       </section>
     </main>
