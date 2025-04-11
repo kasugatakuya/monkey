@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAllSheetData, formatSheetData } from "@/utils/googleSheets";
+import { getAllSpreadsheetsData } from "@/utils/googleSheets";
 
 // キャッシュを無効化し、毎回のリクエストで再検証
 export const dynamic = "force-dynamic";
@@ -11,11 +11,8 @@ export async function GET() {
     // リクエストのタイムスタンプをログに記録（デバッグ用）
     console.log("Sheetsデータ取得リクエスト:", new Date().toISOString());
 
-    // シートからデータを取得
-    const sheetData = await getAllSheetData();
-
-    // データを整形
-    const formattedData = formatSheetData(sheetData);
+    // 全てのスプレッドシートからデータを取得
+    const formattedData = await getAllSpreadsheetsData();
 
     // 正常なレスポンスを返す
     return NextResponse.json(

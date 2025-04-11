@@ -1,12 +1,61 @@
 import Link from "next/link";
+import React from "react";
 
-export default function Home() {
+import { getAllSpreadsheetsData, SheetItem } from "@/utils/googleSheets";
+
+// キャッシュを無効化し、毎回のリクエストで再検証
+export const revalidate = 0;
+
+// サーバーコンポーネントでのデータ取得
+async function getSheetData() {
+  try {
+    return await getAllSpreadsheetsData();
+  } catch (error) {
+    console.error("データ取得エラー:", error);
+    return [] as SheetItem[];
+  }
+}
+
+export default async function Top() {
+  // 全てのスプレッドシートのデータを取得
+  const allData = await getSheetData();
+
+  // データをタイプで分類
+  const newsData = allData.filter((item) => item._sheetType === "news");
+  const liveData = allData.filter((item) => item._sheetType === "live");
+  const memberData = allData.filter((item) => item._sheetType === "member");
+  const musicData = allData.filter((item) => item._sheetType === "music");
+  const otherData = allData.filter((item) => item._sheetType === "unknown");
+
+  // ニュースデータを日付で新しい順にソート
+  const sortedNewsData = [...newsData].sort((a, b) => {
+    const dateA = new Date(a["日付"] || "");
+    const dateB = new Date(b["日付"] || "");
+
+    // 日付が無効な場合は比較しない
+    if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
+      return 0;
+    }
+
+    return dateB.getTime() - dateA.getTime();
+  });
+
+  // ライブデータを日時で新しい順にソート
+  const sortedLiveData = [...liveData].sort((a, b) => {
+    const dateA = new Date(a["日時"] || "");
+    const dateB = new Date(b["日時"] || "");
+
+    // 日付が無効な場合は比較しない
+    if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
+      return 0;
+    }
+
+    return dateA.getTime() - dateB.getTime(); // 未来のライブが先に来るように昇順でソート
+  });
+
   return (
     <main className="mx-5 md:mx-20">
-      {/* 背景ノイズの追加 */}
-      <div className="bg-noise"></div>
-
-      {/* ダメージ効果のあるヒーローセクション - スマホの下部メニューを考慮して調整 */}
+      {/* ダメージ効果のあるヒーローセクション - ヘッダーを考慮して中央に配置 */}
       <div className="title flex min-h-screen flex-col items-center justify-center relative">
         {/* 装飾要素 */}
         <div className="absolute top-1/4 left-10 w-20 h-20 border-4 border-accent opacity-30 rotate-12"></div>
@@ -24,16 +73,16 @@ export default function Home() {
           </div>
 
           {/* CTAボタン */}
-          <div className="mt-12 z-10">
-            <a href="/live" className="btn-punk">
+          <div className="mt-12 z-10 flex gap-4">
+            <Link href="/live" className="btn-punk">
               ライブスケジュール
-            </a>
+            </Link>
           </div>
         </div>
 
-        {/* モバイル用コンテンツ (md未満) - スマホのブラウザ下部メニュー考慮 */}
+        {/* モバイル用コンテンツ (md未満) */}
         <div className="absolute inset-0 flex md:hidden flex-col items-center justify-center -translate-y-8">
-          {/* モバイル用スタイル - スマホ表示の中央位置を上に調整 */}
+          {/* モバイル用スタイル - PCと同じデザインに */}
           <div className="text-4xl text-center relative z-10">MONKEY</div>
           <div className="flex justify-center relative z-10">
             <div className="text-base text-center">パンクロックバンド</div>
@@ -41,109 +90,97 @@ export default function Home() {
 
           {/* モバイル用ボタン */}
           <div className="mt-8 z-10">
-            <a href="/live" className="btn-punk text-sm">
+            <Link href="/live" className="btn-punk text-sm">
               ライブスケジュール
-            </a>
+            </Link>
           </div>
         </div>
       </div>
-
       {/* ニュース */}
-      <section className=" p-8 mb-12">
-        <h2 className="text-3xl font-bold mb-6">ニュース</h2>
+      {sortedNewsData.length > 0 && (
+        <section id="news" className="p-8 mb-12 scroll-mt-16">
+          <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
+            ニュース
+          </h2>
 
-        <article className="mb-12 border-l-4 border-accent pl-4">
-          <div className="flex items-center mb-3">
-            <time className="text-sm opacity-80">2025/04/10</time>
+          {sortedNewsData.map((row, rowIndex) => (
+            <article
+              className="mb-12 border-l-4 border-accent pl-4"
+              key={rowIndex}
+            >
+              <div className="flex items-center mb-3">
+                <time className="text-sm opacity-80">{row["日付"]}</time>
+              </div>
+              <h3 className="text-2xl font-bold mb-2">{row["タイトル"]}</h3>
+              <p className="mb-4 whitespace-pre-line">{row["内容"]}</p>
+              {row["リンクURL"] && (
+                <Link
+                  href={row["リンクURL"]}
+                  className="text-accent hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {row["リンクテキスト"] || "詳細を見る"}
+                </Link>
+              )}
+            </article>
+          ))}
+          <div className="text-center">
+            <a href="/news" className="btn-punk">
+              全てのニュース
+            </a>
           </div>
-          <h3 className="text-2xl font-bold mb-2">
-            武蔵野CITYNIGHTに出演決定!
-          </h3>
-          <p className="mb-4">
-            2025年4月13日(日)に東京都のライブハウス武蔵境STATTOで行われる「武蔵野CITYNIGHT」に出演します。
-          </p>
-          <ul>
-            <li className="mb-2">
-              日時: 2025年4月13日(日) open18:00/start18:30
-            </li>
-            <li className="mb-2">場所: 武蔵境STATTO</li>
-            <li className="mb-2">チケット: 前売り2400/ 当日2900 (+drink600)</li>
-            <li className="mb-2">
-              出演バンド: ①THE TELEPASHITS ②谷 洋平(SHAPEEN!!) ③えんぴつ2本
-              ④MONKEY ⑤きよ川 ⑥The.BLUE MOON
-            </li>
-          </ul>
-          <p className="mb-4">詳細は公式サイトをご覧ください。</p>
-          <Link
-            href="https://www5.hp-ez.com/hp/statto/page176"
-            className="text-accent hover:underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            武蔵境STATTO公式サイト
-          </Link>
-        </article>
+        </section>
+      )}
 
-        <article className="mb-12 border-l-4 border-accent pl-4">
-          <div className="flex items-center mb-3">
-            <time className="text-sm opacity-80">2025/04/09</time>
-          </div>
-          <h3 className="text-2xl font-bold mb-2">
-            公式ホームページがオープンしました!
-          </h3>
-          <p className="mb-4">
-            MONKEYの公式ホームページがオープンしました。今後ともよろしくお願いいたします。
-          </p>
-        </article>
-        <div className="text-center">
-          <a href="/news" className="btn-punk">
-            全てのニュース
-          </a>
-        </div>
-      </section>
+      {/* 楽曲セクション */}
+      {musicData.length > 0 && (
+        <section id="music" className="p-8 mb-12 scroll-mt-16">
+          <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
+            楽曲
+          </h2>
 
-      {/* ライブスケジュール */}
-      <section className="torn-edge bg-accent p-8 mb-20 live-schedule-section">
-        <h2 className="text-3xl font-bold mb-6">ライブスケジュール</h2>
-        <div className="space-y-4 mb-6">
-          {/* スマホでは縦表示、PCでは横表示 */}
-          <div className="md:flex md:justify-between md:flex-wrap block space-y-2 md:space-y-0">
-            <span className="font-bold block md:inline">2025/04/13(日)</span>
-            <span className="block md:inline">
-              東京 - 武蔵境STATTO 「武蔵野CITYNIGHT」open18:00/start18:30&ensp;
-              <Link
-                href="https://www5.hp-ez.com/hp/statto/page176"
-                className="text-accent hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {musicData.map((music, index) => (
+              <div
+                key={index}
+                className="border-2 border-accent p-4 rounded-lg hover:shadow-lg transition-shadow bg-base-100"
               >
-                公式サイト
-              </Link>
-            </span>
-            <span className="block md:inline">チケット発売中</span>
-          </div>
-          <div className="md:flex md:justify-between block space-y-2 md:space-y-0">
-            <span className="font-bold block md:inline">公演日未定</span>
-            <span className="block md:inline">会場未定</span>
-            <span className="block md:inline">チケット未定</span>
-          </div>
-          <div className="md:flex md:justify-between block space-y-2 md:space-y-0">
-            <span className="font-bold block md:inline">公演日未定</span>
-            <span className="block md:inline">会場未定</span>
-            <span className="block md:inline">チケット未定</span>
-          </div>
-        </div>
-        <div className="text-center">
-          <a href="/live" className="btn-punk bg-black text-foreground">
-            全てのライブスケジュール
-          </a>
-        </div>
-      </section>
+                <h3 className="text-xl font-bold mb-3">{music["曲名"]}</h3>
 
-      {/* 最新リリース */}
+                {music["音源URL"] && (
+                  <div className="mb-3">
+                    <iframe
+                      width="100%"
+                      height="120"
+                      scrolling="no"
+                      frameBorder="no"
+                      allow="autoplay"
+                      src={
+                        music["音源URL"].includes("soundcloud.com")
+                          ? `https://w.soundcloud.com/player/?url=${encodeURIComponent(
+                              music["音源URL"]
+                            )}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true`
+                          : music["音源URL"]
+                      }
+                    ></iframe>
+                  </div>
+                )}
+
+                {music["説明"] && (
+                  <div className="text-sm whitespace-pre-line mt-2">
+                    {music["説明"]}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+      {/* 最新アルバム */}
       <section className="punk-section p-8 mb-20">
         <h2 className="text-3xl font-bold text-distressed text-accent mb-6">
-          最新リリース
+          最新アルバム
         </h2>
         <div className="md:flex items-center">
           <div className="md:w-1/2 p-4">
@@ -188,6 +225,151 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ライブ情報セクション */}
+      {sortedLiveData.length > 0 && (
+        <section id="live" className="p-8 mb-12 scroll-mt-16">
+          <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
+            ライブ情報
+          </h2>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
+            {sortedLiveData.map((live, index) => (
+              <div
+                key={index}
+                className="border-2 border-accent p-4 rounded-lg hover:shadow-lg transition-shadow bg-base-100"
+              >
+                <h3 className="text-xl font-bold mb-2">{live["ライブ名"]}</h3>
+                <div className="grid grid-cols-3 gap-2 mb-3">
+                  <div className="font-semibold text-accent/80">日時:</div>
+                  <div className="col-span-2">{live["日時"]}</div>
+
+                  <div className="font-semibold text-accent/80">場所:</div>
+                  <div className="col-span-2">{live["場所"]}</div>
+
+                  <div className="font-semibold text-accent/80">チケット:</div>
+                  <div className="col-span-2">{live["チケット代"]}</div>
+
+                  <div className="font-semibold text-accent/80">販売状況:</div>
+                  <div className="col-span-2">{live["販売状況"]}</div>
+                </div>
+                {live["説明"] && (
+                  <div className="mb-3">
+                    <p className="text-sm whitespace-pre-line">
+                      {live["説明"]}
+                    </p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <a href="/live" className="btn-punk bg-black text-foreground">
+              全てのライブスケジュール
+            </a>
+          </div>
+        </section>
+      )}
+
+      {/* メンバー紹介セクション */}
+      {memberData.length > 0 && (
+        <section id="members" className="p-8 mb-12 scroll-mt-16">
+          <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
+            メンバー紹介
+          </h2>
+
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {memberData.map((member, index) => (
+              <div
+                key={index}
+                className="border-2 border-accent p-6 rounded-lg hover:shadow-lg transition-shadow bg-base-100"
+              >
+                <div className="flex flex-col items-center mb-4">
+                  <div className="w-28 h-28 bg-accent/20 rounded-full mb-4 flex items-center justify-center">
+                    {/* メンバーの頭文字をアバター代わりに表示 */}
+                    <span className="text-4xl font-bold">
+                      {member["名前"]?.charAt(0) || "?"}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-bold">{member["名前"]}</h3>
+                  <div className="text-accent mt-1">{member["担当"]}</div>
+                </div>
+
+                {member["説明"] && (
+                  <div className="mb-4">
+                    <p className="text-sm whitespace-pre-line">
+                      {member["説明"]}
+                    </p>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 gap-2 text-sm border-t border-accent/30 pt-4 mt-2">
+                  {member["使用機材"] && (
+                    <div className="flex flex-col">
+                      <span className="font-semibold text-accent/80">
+                        使用機材
+                      </span>
+                      <span>{member["使用機材"]}</span>
+                    </div>
+                  )}
+
+                  {member["好きなアーティスト"] && (
+                    <div className="flex flex-col">
+                      <span className="font-semibold text-accent/80">
+                        好きなアーティスト
+                      </span>
+                      <span>{member["好きなアーティスト"]}</span>
+                    </div>
+                  )}
+
+                  {member["好きな食べ物"] && (
+                    <div className="flex flex-col">
+                      <span className="font-semibold text-accent/80">
+                        好きな食べ物
+                      </span>
+                      <span>{member["好きな食べ物"]}</span>
+                    </div>
+                  )}
+
+                  {member["趣味"] && (
+                    <div className="flex flex-col">
+                      <span className="font-semibold text-accent/80">趣味</span>
+                      <span>{member["趣味"]}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* その他のデータ（不明なフォーマット）があれば表示 */}
+      {otherData.length > 0 && (
+        <section id="other" className="p-8 mb-12 scroll-mt-16">
+          <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
+            その他の情報
+          </h2>
+
+          <div className="grid gap-6">
+            {otherData.map((item, index) => (
+              <div key={index} className="border p-4 rounded">
+                <h3 className="text-xl font-bold mb-2">項目 {index + 1}</h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {Object.entries(item)
+                    .filter(([key]) => !key.startsWith("_")) // 内部使用のフィールドは除外
+                    .map(([key, value]) => (
+                      <React.Fragment key={key}>
+                        <div className="font-semibold">{key}:</div>
+                        <div>{String(value)}</div>
+                      </React.Fragment>
+                    ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   );
 }

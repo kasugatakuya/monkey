@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-import { getAllSheetData, formatSheetData } from "@/utils/googleSheets";
+import { getAllSpreadsheetsData, SheetItem } from "@/utils/googleSheets";
 
 // キャッシュを無効化し、毎回のリクエストで再検証
 export const revalidate = 0;
@@ -9,17 +9,34 @@ export const revalidate = 0;
 // サーバーコンポーネントでのデータ取得
 async function getSheetData() {
   try {
-    const sheetData = await getAllSheetData();
-    return formatSheetData(sheetData);
+    return await getAllSpreadsheetsData();
   } catch (error) {
     console.error("データ取得エラー:", error);
-    return [];
+    return [] as SheetItem[];
   }
 }
 
 export default async function News() {
-  // スプレッドシートのデータを取得
-  const data = await getSheetData();
+  // 全てのスプレッドシートのデータを取得
+  const allData = await getSheetData();
+
+  // データをタイプで分類
+  const newsData = allData.filter((item) => item._sheetType === "news");
+  const otherData = allData.filter((item) => item._sheetType === "unknown");
+
+  // ニュースデータを日付で新しい順にソート
+  const sortedNewsData = [...newsData].sort((a, b) => {
+    const dateA = new Date(a["日付"] || "");
+    const dateB = new Date(b["日付"] || "");
+
+    // 日付が無効な場合は比較しない
+    if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
+      return 0;
+    }
+
+    return dateB.getTime() - dateA.getTime();
+  });
+
   return (
     <main className="mx-5 md:mx-20">
       {/* ダメージ効果のあるヒーローセクション - ヘッダーを考慮して中央に配置 */}
@@ -40,7 +57,7 @@ export default async function News() {
           </div>
 
           {/* CTAボタン */}
-          <div className="mt-12 z-10">
+          <div className="mt-12 z-10 flex gap-4">
             <Link href="/" className="btn-punk">
               TOPへ戻る
             </Link>
@@ -63,39 +80,64 @@ export default async function News() {
           </div>
         </div>
       </div>
-
       {/* ニュース */}
-      <section className=" p-8 mb-12">
-        <h2 className="text-3xl font-bold mb-6">ニュース</h2>
+      {sortedNewsData.length > 0 && (
+        <section id="news" className="p-8 mb-12 scroll-mt-16">
+          <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
+            ニュース
+          </h2>
 
-        {data.map((row, rowIndex) => (
-          <article
-            className="mb-12 border-l-4 border-accent pl-4"
-            key={rowIndex}
-          >
-            <div className="flex items-center mb-3">
-              <time className="text-sm opacity-80">{row["日付"]}</time>
-            </div>
-            <h3 className="text-2xl font-bold mb-2">{row["タイトル"]}</h3>
-            <p className="mb-4">
-              {row["内容"].split("\n").map((line, i) => (
-                <React.Fragment key={i}>
-                  {line}
-                  {i < row["内容"].split("\n").length - 1 && <br />}
-                </React.Fragment>
-              ))}
-            </p>
-            <Link
-              href={row["リンクURL"]}
-              className="text-accent hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
+          {sortedNewsData.map((row, rowIndex) => (
+            <article
+              className="mb-12 border-l-4 border-accent pl-4"
+              key={rowIndex}
             >
-              {row["リンクテキスト"]}
-            </Link>
-          </article>
-        ))}
-      </section>
+              <div className="flex items-center mb-3">
+                <time className="text-sm opacity-80">{row["日付"]}</time>
+              </div>
+              <h3 className="text-2xl font-bold mb-2">{row["タイトル"]}</h3>
+              <p className="mb-4 whitespace-pre-line">{row["内容"]}</p>
+              {row["リンクURL"] && (
+                <Link
+                  href={row["リンクURL"]}
+                  className="text-accent hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {row["リンクテキスト"] || "詳細を見る"}
+                </Link>
+              )}
+            </article>
+          ))}
+        </section>
+      )}
+
+      {/* その他のデータ（不明なフォーマット）があれば表示 */}
+      {otherData.length > 0 && (
+        <section id="other" className="p-8 mb-12 scroll-mt-16">
+          <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
+            その他の情報
+          </h2>
+
+          <div className="grid gap-6">
+            {otherData.map((item, index) => (
+              <div key={index} className="border p-4 rounded">
+                <h3 className="text-xl font-bold mb-2">項目 {index + 1}</h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {Object.entries(item)
+                    .filter(([key]) => !key.startsWith("_")) // 内部使用のフィールドは除外
+                    .map(([key, value]) => (
+                      <React.Fragment key={key}>
+                        <div className="font-semibold">{key}:</div>
+                        <div>{String(value)}</div>
+                      </React.Fragment>
+                    ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   );
 }

@@ -27,7 +27,7 @@ export default function Header() {
             className="px-4 font-bold lg:px-12 transform hover:rotate-1"
           >
             <div className="lg:text-xl text-accent"> LIVE</div>
-            <div className="text-xs">ライブスケジュール</div>
+            <div className="text-xs">ライブ情報</div>
           </Link>
           <Link href="/music" className="font-bold transform hover:rotate-1">
             <div className="lg:text-xl text-accent"> MUSIC</div>

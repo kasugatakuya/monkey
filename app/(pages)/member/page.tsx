@@ -1,5 +1,30 @@
 import Link from "next/link";
-export default function Member() {
+import React from "react";
+
+import { getAllSpreadsheetsData, SheetItem } from "@/utils/googleSheets";
+
+// キャッシュを無効化し、毎回のリクエストで再検証
+export const revalidate = 0;
+
+// サーバーコンポーネントでのデータ取得
+async function getSheetData() {
+  try {
+    return await getAllSpreadsheetsData();
+  } catch (error) {
+    console.error("データ取得エラー:", error);
+    return [] as SheetItem[];
+  }
+}
+
+export default async function Top() {
+  // 全てのスプレッドシートのデータを取得
+  const allData = await getSheetData();
+
+  // データをタイプで分類
+  const memberData = allData.filter((item) => item._sheetType === "member");
+
+  const otherData = allData.filter((item) => item._sheetType === "unknown");
+
   return (
     <main className="mx-5 md:mx-20">
       {/* ダメージ効果のあるヒーローセクション - ヘッダーを考慮して中央に配置 */}
@@ -20,9 +45,9 @@ export default function Member() {
           </div>
 
           {/* CTAボタン */}
-          <div className="mt-12 z-10">
+          <div className="mt-12 z-10 flex gap-4">
             <Link href="/" className="btn-punk">
-              TOPへ戻る
+              TOPに戻る
             </Link>
           </div>
         </div>
@@ -38,118 +63,111 @@ export default function Member() {
           {/* モバイル用ボタン */}
           <div className="mt-8 z-10">
             <Link href="/" className="btn-punk text-sm">
-              TOPへ戻る
+              TOPに戻る
             </Link>
           </div>
         </div>
       </div>
-      {/* メンバー紹介セクション */}
-      <div className="relative py-20 px-4 md:px-10 bg-base-200">
-        {/* 装飾要素 */}
-        <div className="absolute top-10 right-5 w-16 h-16 border-4 border-accent opacity-20 rotate-45"></div>
-        <div className="absolute bottom-10 left-5 w-24 h-24 border-4 border-primary opacity-15 -rotate-12"></div>
 
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 relative">
-          <span className="relative inline-block">
-            BAND MEMBERS
-            <div className="absolute -bottom-3 left-0 w-full h-1 bg-accent"></div>
-          </span>
-        </h2>
+      {/* バンドメンバーセクション */}
+      {memberData.length > 0 && (
+        <section id="members" className="p-8 mb-12 scroll-mt-16">
+          <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
+            バンドメンバー
+          </h2>
 
-        <div className="flex flex-col gap-12 max-w-4xl mx-auto">
-          {/* ギターボーカル：りゅうじ */}
-          <div className="member-section bg-base-100 relative overflow-hidden transform transition-all duration-300 hover:shadow-lg">
-            <div className="flex flex-col md:flex-row">
-              <div className="md:w-1/3 bg-gray-800 relative">
-                {/* メンバー画像のプレースホルダー */}
-                <div className="aspect-square md:h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20">
-                  <span className="text-6xl opacity-30">🎸</span>
-                </div>
-              </div>
-              <div className="md:w-2/3 p-6 relative">
-                {/* 役割 */}
-                <div className="inline-block pl-1 py-1 bg-accent text-accent-content text-sm font-semibold mb-3">
-                  GUITAR & VOCAL
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {memberData.map((member, index) => (
+              <div
+                key={index}
+                className="border-2 border-accent p-6 rounded-lg hover:shadow-lg transition-shadow bg-base-100"
+              >
+                <div className="flex flex-col items-center mb-4">
+                  <div className="w-28 h-28 bg-accent/20 rounded-full mb-4 flex items-center justify-center">
+                    {/* メンバーの頭文字をアバター代わりに表示 */}
+                    <span className="text-4xl font-bold">
+                      {member["名前"]?.charAt(0) || "?"}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-bold">{member["名前"]}</h3>
+                  <div className="text-accent mt-1">{member["担当"]}</div>
                 </div>
 
-                {/* 名前 */}
-                <h3 className="text-2xl font-bold mb-4">りゅうじ</h3>
+                {member["説明"] && (
+                  <div className="mb-4">
+                    <p className="text-sm whitespace-pre-line">
+                      {member["説明"]}
+                    </p>
+                  </div>
+                )}
 
-                {/* 説明文（必要に応じて追加） */}
-                <p className="text-base-content/80 md:text-lg">
-                  {/* バンドのフロントマン。エネルギッシュでワイルドな歌声で観客を魅了する。 */}
-                </p>
+                <div className="grid grid-cols-1 gap-2 text-sm border-t border-accent/30 pt-4 mt-2">
+                  {member["使用機材"] && (
+                    <div className="flex flex-col">
+                      <span className="font-semibold text-accent/80">
+                        使用機材
+                      </span>
+                      <span>{member["使用機材"]}</span>
+                    </div>
+                  )}
 
-                {/* 装飾要素 */}
-                <div className="absolute bottom-3 right-3 w-10 h-10 border-2 border-accent/30 rotate-12"></div>
+                  {member["好きなアーティスト"] && (
+                    <div className="flex flex-col">
+                      <span className="font-semibold text-accent/80">
+                        好きなアーティスト
+                      </span>
+                      <span>{member["好きなアーティスト"]}</span>
+                    </div>
+                  )}
+
+                  {member["好きな食べ物"] && (
+                    <div className="flex flex-col">
+                      <span className="font-semibold text-accent/80">
+                        好きな食べ物
+                      </span>
+                      <span>{member["好きな食べ物"]}</span>
+                    </div>
+                  )}
+
+                  {member["趣味"] && (
+                    <div className="flex flex-col">
+                      <span className="font-semibold text-accent/80">趣味</span>
+                      <span>{member["趣味"]}</span>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
+            ))}
           </div>
+        </section>
+      )}
 
-          {/* ドラム：じゅん */}
-          <div className="member-section bg-base-100 relative overflow-hidden transform transition-all duration-300 hover:shadow-lg">
-            <div className="flex flex-col md:flex-row">
-              <div className="md:w-1/3 bg-gray-800 relative">
-                {/* メンバー画像のプレースホルダー */}
-                <div className="aspect-square md:h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20">
-                  <span className="text-6xl opacity-30">🥁</span>
+      {/* その他のデータ（不明なフォーマット）があれば表示 */}
+      {otherData.length > 0 && (
+        <section id="other" className="p-8 mb-12 scroll-mt-16">
+          <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
+            その他の情報
+          </h2>
+
+          <div className="grid gap-6">
+            {otherData.map((item, index) => (
+              <div key={index} className="border p-4 rounded">
+                <h3 className="text-xl font-bold mb-2">項目 {index + 1}</h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {Object.entries(item)
+                    .filter(([key]) => !key.startsWith("_")) // 内部使用のフィールドは除外
+                    .map(([key, value]) => (
+                      <React.Fragment key={key}>
+                        <div className="font-semibold">{key}:</div>
+                        <div>{String(value)}</div>
+                      </React.Fragment>
+                    ))}
                 </div>
               </div>
-              <div className="md:w-2/3 p-6 relative">
-                {/* 役割 */}
-                <div className="inline-block pl-1 py-1 bg-secondary text-secondary-content text-sm font-semibold mb-3">
-                  DRUMS
-                </div>
-
-                {/* 名前 */}
-                <h3 className="text-2xl font-bold mb-4">じゅん</h3>
-
-                {/* 説明文（必要に応じて追加） */}
-                <p className="text-base-content/80 md:text-lg">
-                  {/* 精密なリズムと力強いビートでバンドを支える。ライブでのエネルギッシュな演奏が持ち味。 */}
-                </p>
-
-                {/* 装飾要素 */}
-                <div className="absolute bottom-3 right-3 w-10 h-10 border-2 border-secondary/30 -rotate-12"></div>
-              </div>
-            </div>
+            ))}
           </div>
-
-          {/* ベース：たくや */}
-          <div className="member-section bg-base-100 relative overflow-hidden transform transition-all duration-300 hover:shadow-lg">
-            <div className="flex flex-col md:flex-row">
-              <div className="md:w-1/3 bg-gray-800 relative">
-                {/* メンバー画像のプレースホルダー */}
-                <div className="aspect-square md:h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20">
-                  <span className="text-6xl opacity-30">🎸</span>
-                </div>
-              </div>
-              <div className="md:w-2/3 p-6 relative">
-                {/* 役割 */}
-                <div className="inline-block pl-1 py-1 bg-primary text-primary-content text-sm font-semibold mb-3">
-                  BASS
-                </div>
-
-                {/* 名前 */}
-                <h3 className="text-2xl font-bold mb-4">たくや</h3>
-
-                {/* 説明文（必要に応じて追加） */}
-                <p className="text-base-content/80 md:text-lg">
-                  {/* 重厚なベースラインと確かな技術力でバンドサウンドの基盤を作る。 */}
-                </p>
-
-                {/* 装飾要素 */}
-                <div className="absolute bottom-3 right-3 w-10 h-10 border-2 border-primary/30 rotate-6"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* セクション下部の装飾 */}
-        <div className="flex justify-center mt-16">
-          <div className="w-16 h-1 bg-accent/50"></div>
-        </div>
-      </div>
+        </section>
+      )}
     </main>
   );
 }
