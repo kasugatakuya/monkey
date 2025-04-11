@@ -27,6 +27,8 @@ async function getSheetData() {
 export default async function Test() {
   // スプレッドシートのデータを取得
   const data = await getSheetData();
+  console.log("データ:", data); // デバッグログ
+  console.log("データ[0]['タイトル']:", data[0]["タイトル"]); // デバッグログ
 
   return (
     <main className="mx-5 md:mx-20">
