@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+// import Image from "next/image";
 
 import { getAllSpreadsheetsData, SheetItem } from "@/utils/googleSheets";
 
@@ -83,11 +84,18 @@ export default async function Top() {
                 className="border-2 border-accent p-6 rounded-lg hover:shadow-lg transition-shadow bg-base-100"
               >
                 <div className="flex flex-col items-center mb-4">
-                  <div className="w-28 h-28 bg-accent/20 rounded-full mb-4 flex items-center justify-center">
+                  <div className="w-40 h-40 bg-accent/20 rounded-full mb-4 flex items-center justify-center">
+                    {/* <Image
+                      src={`/${member["画像"]}`}
+                      width={200}
+                      height={200}
+                      alt="X"
+                    /> */}
                     {/* メンバーの頭文字をアバター代わりに表示 */}
-                    <span className="text-4xl font-bold">
+                    {/* <span className="text-4xl font-bold">
                       {member["名前"]?.charAt(0) || "?"}
-                    </span>
+                    </span> */}
+                    <span className="text-2xl font-bold">No Image</span>
                   </div>
                   <h3 className="text-2xl font-bold">{member["名前"]}</h3>
                   <div className="text-accent mt-1">{member["担当"]}</div>

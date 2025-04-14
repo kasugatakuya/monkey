@@ -35,6 +35,7 @@ interface MemberItem extends BaseItem {
   好きなアーティスト?: string;
   好きな食べ物?: string;
   趣味?: string;
+  画像?: string;
 }
 
 interface MusicItem extends BaseItem {
