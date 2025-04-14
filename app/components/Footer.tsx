@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   const [currentYear, setCurrentYear] = useState("");
@@ -14,21 +16,37 @@ export default function Footer() {
     <footer className="text-md py-20 text-center angled-border">
       <div className="punk-section mx-auto max-w-md p-6 mb-8">
         <div className="text-2xl text-distressed text-accent mb-4">
-          FOLLOW THE CHAOS
+          SNS FOLLOW
         </div>
-        <div className="flex justify-center space-x-8 mb-6">
-          <a href="#" className="text-2xl">
-            📱
-          </a>
-          <a href="#" className="text-2xl">
-            🎵
-          </a>
-          <a href="#" className="text-2xl">
-            📸
-          </a>
-          <a href="#" className="text-2xl">
-            🎬
-          </a>
+        <div className="flex justify-center items-center space-x-8 mb-6">
+          <Link href="#" className="text-2xl">
+            <Image src="/x-icon.webp" width={70} height={70} alt="X" />
+          </Link>
+          <Link href="#" className="text-2xl">
+            <Image
+              src="/instagram-img.webp"
+              width={35}
+              height={35}
+              alt="instagram"
+            />
+          </Link>
+          <Link href="#" className="text-2xl px-2">
+            <Image
+              src="/facebook-icon.webp"
+              width={49}
+              height={49}
+              alt="facebook"
+            />
+          </Link>
+          <Link href="#" className="text-2xl">
+            <Image
+              src="/youtube.webp"
+              width={35}
+              height={35}
+              alt="youtube"
+              className="rounded"
+            />
+          </Link>
         </div>
       </div>
       <p>© MONKEY 2024 - {currentYear}</p>

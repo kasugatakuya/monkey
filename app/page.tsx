@@ -126,9 +126,9 @@ export default async function Top() {
             </article>
           ))}
           <div className="text-center">
-            <a href="/news" className="btn-punk">
+            <Link href="/news" className="btn-punk">
               全てのニュース
-            </a>
+            </Link>
           </div>
         </section>
       )}
@@ -204,24 +204,24 @@ export default async function Top() {
               </li>
               <li className="flex items-center">
                 <span className="text-accent mr-2">02.</span>
-                パンクノットデッド(仮)
+                パンクイズノットデッド(仮)
               </li>
               <li className="flex items-center">
                 <span className="text-accent mr-2">03.</span> 役人ファック(仮)
               </li>
               <li className="flex items-center">
-                <span className="text-accent mr-2">04.</span> 始まりのうた(仮)
+                <span className="text-accent mr-2">04.</span> はじまりの詩(仮)
               </li>
               <li className="flex items-center">
                 <span className="text-accent mr-2">05.</span> あっちいけ(仮)
               </li>
               <li className="flex items-center">
-                <span className="text-accent mr-2">06.</span> 激情(仮)
+                <span className="text-accent mr-2">06.</span> 激(仮)
               </li>
             </ul>
-            <a href="/music" className="btn-punk">
+            <Link href="/music" className="btn-punk">
               全ての楽曲
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -264,9 +264,9 @@ export default async function Top() {
             ))}
           </div>
           <div className="text-center">
-            <a href="/live" className="btn-punk bg-black text-foreground">
+            <Link href="/live" className="btn-punk bg-black text-foreground">
               全てのライブスケジュール
-            </a>
+            </Link>
           </div>
         </section>
       )}

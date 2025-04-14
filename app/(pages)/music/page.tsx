@@ -139,19 +139,19 @@ export default async function Music() {
               </li>
               <li className="flex items-center">
                 <span className="text-accent mr-2">02.</span>
-                パンクノットデッド(仮)
+                パンクイズノットデッド(仮)
               </li>
               <li className="flex items-center">
                 <span className="text-accent mr-2">03.</span> 役人ファック(仮)
               </li>
               <li className="flex items-center">
-                <span className="text-accent mr-2">04.</span> 始まりのうた(仮)
+                <span className="text-accent mr-2">04.</span> はじまりの詩(仮)
               </li>
               <li className="flex items-center">
                 <span className="text-accent mr-2">05.</span> あっちいけ(仮)
               </li>
               <li className="flex items-center">
-                <span className="text-accent mr-2">06.</span> 激情(仮)
+                <span className="text-accent mr-2">06.</span> 激(仮)
               </li>
               <li className="flex items-center">
                 <span className="text-accent mr-2">07.</span> 壊れた(仮)
