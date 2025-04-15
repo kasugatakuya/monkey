@@ -287,9 +287,10 @@ export default async function Top() {
                 <div className="flex flex-col items-center mb-4">
                   <div className="w-28 h-28 bg-accent/20 rounded-full mb-4 flex items-center justify-center">
                     {/* メンバーの頭文字をアバター代わりに表示 */}
-                    <span className="text-4xl font-bold">
+                    {/* <span className="text-4xl font-bold">
                       {member["名前"]?.charAt(0) || "?"}
-                    </span>
+                    </span> */}
+                    <span className="text-2xl font-bold">No Image</span>
                   </div>
                   <h3 className="text-2xl font-bold">{member["名前"]}</h3>
                   <div className="text-accent mt-1">{member["担当"]}</div>
