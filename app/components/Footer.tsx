@@ -19,7 +19,12 @@ export default function Footer() {
           SNS FOLLOW
         </div>
         <div className="flex justify-center items-center space-x-8 mb-6">
-          <Link href="#" className="text-2xl">
+          <Link
+            href="https://x.com/JunKato8/status/1908923623529996477"
+            className="text-2xl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image src="/x-icon.webp" width={70} height={70} alt="X" />
           </Link>
           <Link href="#" className="text-2xl">
