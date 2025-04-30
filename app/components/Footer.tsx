@@ -20,7 +20,7 @@ export default function Footer() {
         </div>
         <div className="flex justify-center items-center space-x-8 mb-6">
           <Link
-            href="https://x.com/JunKato8/status/1908923623529996477"
+            href="https://x.com/monkey39714"
             className="text-2xl"
             target="_blank"
             rel="noopener noreferrer"
