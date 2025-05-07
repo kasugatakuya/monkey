@@ -45,17 +45,8 @@ interface MusicItem extends BaseItem {
   説明?: string;
 }
 
-interface UnknownItem extends BaseItem {
-  _sheetType: "unknown";
-}
-
 // すべてのデータタイプを結合
-export type SheetItem =
-  | NewsItem
-  | LiveItem
-  | MemberItem
-  | MusicItem
-  | UnknownItem;
+export type SheetItem = NewsItem | LiveItem | MemberItem | MusicItem;
 
 // Google Sheets APIのクライアントを初期化する関数
 export async function getGoogleSheetsClient() {
@@ -128,7 +119,7 @@ export async function getAllSheetData(
 // スプレッドシートの種類を判定する関数
 function determineSheetType(
   headers: string[]
-): "news" | "live" | "member" | "music" | "unknown" {
+): "news" | "live" | "member" | "music" {
   // ニュース形式（日付、タイトル、内容などのヘッダーがある）
   if (
     headers.includes("日付") &&
@@ -157,8 +148,8 @@ function determineSheetType(
     return "music";
   }
 
-  // その他の形式
-  return "unknown";
+  // デフォルトではnewsを返す（unknownの代わり）
+  return "news";
 }
 
 // 複数のスプレッドシートからデータを取得する関数

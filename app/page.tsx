@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 import { getAllSpreadsheetsData, SheetItem } from "@/utils/googleSheets";
+import { MemberGrid } from "@/app/components/Member";
 
 // キャッシュを無効化し、毎回のリクエストで再検証
 export const revalidate = 0;
@@ -25,7 +26,6 @@ export default async function Top() {
   const liveData = allData.filter((item) => item._sheetType === "live");
   const memberData = allData.filter((item) => item._sheetType === "member");
   const musicData = allData.filter((item) => item._sheetType === "music");
-  const otherData = allData.filter((item) => item._sheetType === "unknown");
 
   // ニュースデータを日付で新しい順にソート
   const sortedNewsData = [...newsData].sort((a, b) => {
@@ -271,106 +271,8 @@ export default async function Top() {
         </section>
       )}
 
-      {/* メンバー紹介セクション */}
-      {memberData.length > 0 && (
-        <section id="members" className="p-8 mb-12 scroll-mt-16">
-          <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
-            メンバー紹介
-          </h2>
-
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {memberData.map((member, index) => (
-              <div
-                key={index}
-                className="border-2 border-accent p-6 rounded-lg hover:shadow-lg transition-shadow bg-base-100"
-              >
-                <div className="flex flex-col items-center mb-4">
-                  <div className="w-28 h-28 bg-accent/20 rounded-full mb-4 flex items-center justify-center">
-                    {/* メンバーの頭文字をアバター代わりに表示 */}
-                    {/* <span className="text-4xl font-bold">
-                      {member["名前"]?.charAt(0) || "?"}
-                    </span> */}
-                    <span className="text-2xl font-bold">No Image</span>
-                  </div>
-                  <h3 className="text-2xl font-bold">{member["名前"]}</h3>
-                  <div className="text-accent mt-1">{member["担当"]}</div>
-                </div>
-
-                {member["説明"] && (
-                  <div className="mb-4">
-                    <p className="text-sm whitespace-pre-line">
-                      {member["説明"]}
-                    </p>
-                  </div>
-                )}
-
-                <div className="grid grid-cols-1 gap-2 text-sm border-t border-accent/30 pt-4 mt-2">
-                  {member["使用機材"] && (
-                    <div className="flex flex-col">
-                      <span className="font-semibold text-accent/80">
-                        使用機材
-                      </span>
-                      <span>{member["使用機材"]}</span>
-                    </div>
-                  )}
-
-                  {member["好きなアーティスト"] && (
-                    <div className="flex flex-col">
-                      <span className="font-semibold text-accent/80">
-                        好きなアーティスト
-                      </span>
-                      <span>{member["好きなアーティスト"]}</span>
-                    </div>
-                  )}
-
-                  {member["好きな食べ物"] && (
-                    <div className="flex flex-col">
-                      <span className="font-semibold text-accent/80">
-                        好きな食べ物
-                      </span>
-                      <span>{member["好きな食べ物"]}</span>
-                    </div>
-                  )}
-
-                  {member["趣味"] && (
-                    <div className="flex flex-col">
-                      <span className="font-semibold text-accent/80">趣味</span>
-                      <span>{member["趣味"]}</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* その他のデータ（不明なフォーマット）があれば表示 */}
-      {otherData.length > 0 && (
-        <section id="other" className="p-8 mb-12 scroll-mt-16">
-          <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
-            その他の情報
-          </h2>
-
-          <div className="grid gap-6">
-            {otherData.map((item, index) => (
-              <div key={index} className="border p-4 rounded">
-                <h3 className="text-xl font-bold mb-2">項目 {index + 1}</h3>
-                <div className="grid grid-cols-2 gap-2">
-                  {Object.entries(item)
-                    .filter(([key]) => !key.startsWith("_")) // 内部使用のフィールドは除外
-                    .map(([key, value]) => (
-                      <React.Fragment key={key}>
-                        <div className="font-semibold">{key}:</div>
-                        <div>{String(value)}</div>
-                      </React.Fragment>
-                    ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+      {/* メンバー紹介セクション - コンポーネント化 */}
+      <MemberGrid memberData={memberData} />
     </main>
   );
 }

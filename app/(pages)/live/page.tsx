@@ -22,7 +22,6 @@ export default async function Top() {
 
   // データをタイプで分類
   const liveData = allData.filter((item) => item._sheetType === "live");
-  const otherData = allData.filter((item) => item._sheetType === "unknown");
 
   // ライブデータを日時で新しい順にソート
   const sortedLiveData = [...liveData].sort((a, b) => {
@@ -115,33 +114,6 @@ export default async function Top() {
                     </p>
                   </div>
                 )}
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* その他のデータ（不明なフォーマット）があれば表示 */}
-      {otherData.length > 0 && (
-        <section id="other" className="p-8 mb-12 scroll-mt-16">
-          <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
-            その他の情報
-          </h2>
-
-          <div className="grid gap-6">
-            {otherData.map((item, index) => (
-              <div key={index} className="border p-4 rounded">
-                <h3 className="text-xl font-bold mb-2">項目 {index + 1}</h3>
-                <div className="grid grid-cols-2 gap-2">
-                  {Object.entries(item)
-                    .filter(([key]) => !key.startsWith("_")) // 内部使用のフィールドは除外
-                    .map(([key, value]) => (
-                      <React.Fragment key={key}>
-                        <div className="font-semibold">{key}:</div>
-                        <div>{String(value)}</div>
-                      </React.Fragment>
-                    ))}
-                </div>
               </div>
             ))}
           </div>
