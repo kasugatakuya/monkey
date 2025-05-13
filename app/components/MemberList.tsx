@@ -10,8 +10,8 @@ interface MemberCardProps {
   showFullDetails?: boolean;
 }
 
-// MemberGrid のプロパティ定義
-interface MemberGridProps {
+// MemberList のプロパティ定義
+interface MemberListProps {
   memberData: SheetItem[];
   title?: string;
 }
@@ -96,11 +96,11 @@ export function MemberCard({
   );
 }
 
-// MemberGrid コンポーネント
-export function MemberGrid({
+// MemberList コンポーネント
+export function MemberList({
   memberData,
   title = "メンバー紹介",
-}: MemberGridProps) {
+}: MemberListProps) {
   if (memberData.length === 0) {
     return null;
   }
@@ -120,5 +120,5 @@ export function MemberGrid({
   );
 }
 
-// デフォルトエクスポート（MemberGridをデフォルトとして提供）
-export default MemberGrid;
+// デフォルトエクスポート（MemberListをデフォルトとして提供）
+export default MemberList;

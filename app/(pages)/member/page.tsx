@@ -1,8 +1,7 @@
-import Link from "next/link";
 import React from "react";
 
 import { getAllSpreadsheetsData, SheetItem } from "@/utils/googleSheets";
-import { MemberGrid } from "@/app/components/Member";
+import { MemberList } from "@/app/components/MemberList";
 import { TitleSection } from "@/app/components/TitleSection";
 
 // キャッシュを無効化し、毎回のリクエストで再検証
@@ -35,7 +34,7 @@ export default async function Member() {
       />
 
       {/* メンバー紹介セクション - コンポーネント化 */}
-      <MemberGrid memberData={memberData} title="バンドメンバー" />
+      <MemberList memberData={memberData} title="バンドメンバー" />
     </main>
   );
 }
