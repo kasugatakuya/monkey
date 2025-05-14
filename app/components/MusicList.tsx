@@ -40,8 +40,6 @@ export const MusicList: React.FC<MusicListProps> = ({
                       <iframe
                         width="100%"
                         height="120"
-                        scrolling="no"
-                        frameBorder="no"
                         allow="autoplay"
                         src={
                           // 文字列型としてチェックして処理
