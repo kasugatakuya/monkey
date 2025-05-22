@@ -50,9 +50,15 @@ const SITE_CONFIG = {
 } as const;
 
 export const metadata: Metadata = {
-  title: SITE_CONFIG.title,
+  title: {
+    default: SITE_CONFIG.title,
+    template: `%s | ${SITE_CONFIG.siteName}`, // ページごとのタイトル設定用
+  },
   description: SITE_CONFIG.description,
   keywords: SITE_CONFIG.keywords.join(", "),
+
+  // アプリケーション名を明示的に設定
+  applicationName: SITE_CONFIG.title,
 
   // 基本URL設定
   metadataBase: new URL(SITE_CONFIG.url),
@@ -63,7 +69,7 @@ export const metadata: Metadata = {
     description: SITE_CONFIG.description,
     type: "website",
     url: SITE_CONFIG.url,
-    siteName: SITE_CONFIG.siteName,
+    siteName: SITE_CONFIG.title, // titleと統一
     locale: "ja_JP",
   },
 
@@ -105,6 +111,10 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="ja">
+      <head>
+        <meta name="application-name" content="MONKEY | パンクロックバンド" />
+        <meta name="apple-mobile-web-app-title" content="MONKEY" />
+      </head>
       <body className={inter.className}>
         <Header />
 
