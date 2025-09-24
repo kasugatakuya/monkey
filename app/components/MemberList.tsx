@@ -155,10 +155,7 @@ export function MemberCard({
 }
 
 // MemberList コンポーネント
-export function MemberList({
-  memberData,
-  title = "メンバー紹介",
-}: MemberListProps) {
+export function MemberList({ memberData }: MemberListProps) {
   if (memberData.length === 0) {
     return null;
   }
