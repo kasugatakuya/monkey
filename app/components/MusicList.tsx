@@ -113,10 +113,10 @@ export const MusicList: React.FC<MusicListProps> = ({
                 <span className="text-accent">02. PUNK IS NOT DEAD</span>
               </li>
               <li className="flex items-center">
-                <span className="text-accent">03. はじまりの詩</span>
+                <span className="text-accent">03. 名無しのバラード</span>
               </li>
               <li className="flex items-center">
-                <span className="text-accent">04. 名無しのバラード</span>
+                <span className="text-accent">04. はじまりの詩</span>
               </li>
               <li className="flex items-center">
                 <span className="text-accent">05. 激</span>
