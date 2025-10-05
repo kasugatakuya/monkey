@@ -1,19 +1,43 @@
 import { NextResponse } from "next/server";
 import { getAllSpreadsheetsData } from "@/utils/googleSheets";
+import { cache } from "@/utils/cache";
 
-// キャッシュを無効化し、毎回のリクエストで再検証
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+// キャッシュを使用するため、force-dynamicを削除
+export const revalidate = 60; // 60秒ごとに再検証
 
-// Google Sheetsからデータを取得するAPIルート（タイムアウト対策済み）
+// Google Sheetsからデータを取得するAPIルート（キャッシュ対応）
 export async function GET() {
   try {
+    const cacheKey = "sheets-data";
+
+    // キャッシュからデータを取得
+    const cachedData = cache.get(cacheKey);
+    if (cachedData) {
+      console.log("キャッシュからデータを返却");
+      return NextResponse.json(
+        {
+          success: true,
+          data: cachedData,
+          timestamp: new Date().toISOString(),
+          cached: true,
+        },
+        {
+          headers: {
+            "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
+          },
+        }
+      );
+    }
+
     // リクエストのタイムスタンプをログに記録（デバッグ用）
     const startTime = Date.now();
     console.log("Sheetsデータ取得リクエスト開始:", new Date().toISOString());
 
-    // 全てのスプレッドシートからデータを取得（タイムアウトチェック付き）
+    // 全てのスプレッドシートからデータを取得
     const formattedData = await getAllSpreadsheetsData();
+
+    // キャッシュに保存（60秒間）
+    cache.set(cacheKey, formattedData, 60000);
 
     const elapsed = Date.now() - startTime;
     console.log(`データ取得完了: ${elapsed}ms`);
@@ -27,7 +51,7 @@ export async function GET() {
       },
       {
         headers: {
-          "Cache-Control": "no-store, max-age=0",
+          "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
         },
       }
     );
@@ -40,7 +64,7 @@ export async function GET() {
       {
         status: 500,
         headers: {
-          "Cache-Control": "no-store, max-age=0",
+          "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
         },
       }
     );

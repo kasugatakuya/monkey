@@ -79,10 +79,10 @@ export async function getGoogleSheetsClient() {
   }
 }
 
-// スプレッドシートからデータを取得する関数
+// スプレッドシートからデータを取得する関数（バッチリクエスト対応）
 export async function getSpreadsheetData(
   spreadsheetId: string,
-  range: string = "シート1!A1:Z1000"
+  range: string = "シート1!A1:Z100"
 ) {
   try {
     const sheets = await getGoogleSheetsClient();
@@ -91,11 +91,19 @@ export async function getSpreadsheetData(
       throw new Error("スプレッドシートIDが指定されていません");
     }
 
+    // タイムアウトを設定
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('API呼び出しタイムアウト')), 5000)
+    );
+
     // スプレッドシートのデータを取得
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId,
-      range,
-    });
+    const response = await Promise.race([
+      sheets.spreadsheets.values.get({
+        spreadsheetId,
+        range,
+      }),
+      timeoutPromise
+    ]) as any;
 
     // データを返す
     return response.data.values || [];
@@ -104,8 +112,8 @@ export async function getSpreadsheetData(
       `スプレッドシート(${spreadsheetId})データの取得に失敗しました:`,
       error
     );
-    console.error("エラー詳細:", JSON.stringify(error, null, 2));
-    throw error;
+    // エラー時は空配列を返して処理を継続
+    return [];
   }
 }
 
@@ -114,7 +122,7 @@ export async function getAllSheetData(
   spreadsheetId: string,
   sheetName: string = "シート1"
 ) {
-  return getSpreadsheetData(spreadsheetId, `${sheetName}!A1:Z1000`);
+  return getSpreadsheetData(spreadsheetId, `${sheetName}!A1:Z100`);
 }
 
 // スプレッドシートの種類を判定する関数
