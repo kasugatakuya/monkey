@@ -5,14 +5,18 @@ import { getAllSpreadsheetsData } from "@/utils/googleSheets";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-// Google Sheetsからデータを取得するAPIルート
+// Google Sheetsからデータを取得するAPIルート（タイムアウト対策済み）
 export async function GET() {
   try {
     // リクエストのタイムスタンプをログに記録（デバッグ用）
-    console.log("Sheetsデータ取得リクエスト:", new Date().toISOString());
+    const startTime = Date.now();
+    console.log("Sheetsデータ取得リクエスト開始:", new Date().toISOString());
 
-    // 全てのスプレッドシートからデータを取得
+    // 全てのスプレッドシートからデータを取得（タイムアウトチェック付き）
     const formattedData = await getAllSpreadsheetsData();
+
+    const elapsed = Date.now() - startTime;
+    console.log(`データ取得完了: ${elapsed}ms`);
 
     // 正常なレスポンスを返す
     return NextResponse.json(

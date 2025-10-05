@@ -168,12 +168,16 @@ export async function getAllSpreadsheetsData(): Promise<SheetItem[]> {
     throw new Error("スプレッドシートIDが設定されていません");
   }
 
-  // 全てのスプレッドシートからデータを取得
-  const allDataPromises = spreadsheetIds.map(async (id) => {
+  // 全てのスプレッドシートからデータを逐次取得（並列処理を避けてタイムアウトを防ぐ）
+  const allData: SheetItem[][] = [];
+
+  for (const id of spreadsheetIds) {
     try {
+      console.log(`スプレッドシート(${id})の取得開始`);
       const rawData = await getAllSheetData(id);
       if (!rawData || rawData.length < 1) {
-        return [];
+        allData.push([]);
+        continue;
       }
 
       // ヘッダーからシートの種類を判定
@@ -184,19 +188,19 @@ export async function getAllSpreadsheetsData(): Promise<SheetItem[]> {
       const formattedData = formatSheetData(rawData);
 
       // 型付きデータとして返す
-      return formattedData.map((item) => ({
+      const sheetData = formattedData.map((item) => ({
         ...item,
         _sheetType: sheetType,
         _sheetId: id,
       })) as SheetItem[];
+
+      allData.push(sheetData);
+      console.log(`スプレッドシート(${id})の取得完了: ${sheetData.length}件`);
     } catch (error) {
       console.error(`スプレッドシート(${id})の取得に失敗しました:`, error);
-      return []; // エラーが発生しても処理を続行
+      allData.push([]); // エラーが発生しても処理を続行
     }
-  });
-
-  // 全てのデータを取得して結合
-  const allData = await Promise.all(allDataPromises);
+  }
   return allData.flat(); // 配列を平坦化
 }
 
