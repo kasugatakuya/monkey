@@ -63,26 +63,41 @@ export const metadata: Metadata = {
   // 基本URL設定
   metadataBase: new URL(SITE_CONFIG.url),
 
-  // Open Graph設定
+  // Open Graph設定（強化版）
   openGraph: {
     title: SITE_CONFIG.title,
     description: SITE_CONFIG.description,
     type: "website",
     url: SITE_CONFIG.url,
-    siteName: SITE_CONFIG.title, // titleと統一
+    siteName: SITE_CONFIG.title,
     locale: "ja_JP",
+    images: [
+      {
+        url: `${SITE_CONFIG.url}/monkey.png`,
+        width: 1200,
+        height: 630,
+        alt: "MONKEY パンクロックバンド",
+      },
+    ],
   },
 
-  // Twitter Cards設定
+  // Twitter Cards設定（強化版）
   twitter: {
     card: "summary_large_image",
     title: SITE_CONFIG.title,
     description: SITE_CONFIG.description,
+    site: "@monkey_band",
+    creator: "@monkey_band",
+    images: [`${SITE_CONFIG.url}/monkey.png`],
   },
 
   // 正規URL設定
   alternates: {
     canonical: SITE_CONFIG.url,
+    languages: {
+      "ja": SITE_CONFIG.url,
+      "x-default": SITE_CONFIG.url,
+    },
   },
 
   // SEO設定
@@ -102,6 +117,17 @@ export const metadata: Metadata = {
   verification: {
     google: SITE_CONFIG.googleVerification,
   },
+
+  // その他のメタタグ
+  authors: [{ name: "MONKEY" }],
+  creator: "MONKEY",
+  publisher: "MONKEY",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  category: "music",
 };
 
 interface RootLayoutProps {
@@ -114,6 +140,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head>
         <meta name="application-name" content="MONKEY | パンクロックバンド" />
         <meta name="apple-mobile-web-app-title" content="MONKEY" />
+        <link rel="canonical" href={SITE_CONFIG.url} />
+        <meta name="theme-color" content="#000000" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
       </head>
       <body className={inter.className}>
         <Header />
@@ -122,6 +152,54 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
         <UpButton />
         <Footer />
+        
+        {/* 構造化データ (JSON-LD) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "MusicGroup",
+              "name": "MONKEY",
+              "alternateName": "モンキー",
+              "url": "https://monkey-mauve-alpha.vercel.app",
+              "genre": ["パンクロック", "ロック", "Punk Rock"],
+              "description": "パンクロックバンドMONKEYの公式サイトです。",
+              "foundingDate": "2020",
+              "foundingLocation": {
+                "@type": "Place",
+                "name": "日本"
+              },
+              "member": [
+                {
+                  "@type": "Person",
+                  "name": "ギタリスト",
+                  "roleName": "ギター"
+                },
+                {
+                  "@type": "Person",
+                  "name": "ベーシスト",
+                  "roleName": "ベース"
+                },
+                {
+                  "@type": "Person",
+                  "name": "ドラマー",
+                  "roleName": "ドラム"
+                }
+              ],
+              "sameAs": [
+                "https://twitter.com/monkey_band",
+                "https://www.instagram.com/monkey_band",
+                "https://www.youtube.com/monkey_band",
+                "https://www.facebook.com/monkey_band"
+              ],
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://monkey-mauve-alpha.vercel.app/monkey.png"
+              }
+            }),
+          }}
+        />
       </body>
     </html>
   );
