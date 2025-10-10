@@ -34,7 +34,7 @@ export default async function Member() {
       />
 
       {/* メンバー紹介セクション - コンポーネント化 */}
-      <MemberList memberData={memberData} title="バンドメンバー" />
+      <MemberList memberData={memberData} />
     </main>
   );
 }

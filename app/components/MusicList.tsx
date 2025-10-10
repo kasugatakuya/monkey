@@ -22,7 +22,7 @@ export const MusicList: React.FC<MusicListProps> = ({
       {/* 楽曲セクション */}
       {displayedMusic.length > 0 && (
         <section className="mb-12">
-          <div id="music" className="p-8 scroll-mt-16">
+          <div id="music" className="p-2 scroll-mt-16">
             {/* パンクスタイルのセクションタイトル */}
             <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
               楽曲

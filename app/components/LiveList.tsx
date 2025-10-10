@@ -36,7 +36,7 @@ export const LiveList: React.FC<LiveListProps> = ({
     : sortedLiveData;
 
   return (
-    <section id="live" className="p-8 mb-12 scroll-mt-16">
+    <section id="live" className="p-2 mb-12 scroll-mt-16">
       {/* パンクスタイルのセクションタイトル */}
       <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
         ライブ情報

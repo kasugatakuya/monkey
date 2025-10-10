@@ -12,7 +12,6 @@ interface MemberCardProps {
 // MemberList のプロパティ定義
 interface MemberListProps {
   memberData: SheetItem[];
-  title?: string;
 }
 
 // MemberCard コンポーネント
@@ -161,7 +160,7 @@ export function MemberList({ memberData }: MemberListProps) {
   }
 
   return (
-    <section id="members" className="p-8 mb-12 scroll-mt-16">
+    <section id="members" className="p-2 mb-12 scroll-mt-16">
       <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
         バンドメンバー
       </h2>
