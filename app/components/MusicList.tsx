@@ -150,9 +150,15 @@ export const MusicList: React.FC<MusicListProps> = ({
 
                   <div className="flex flex-col gap-3 mt-10">
                     <div>
-                      <span className="text-lg font-black bg-green-500 text-black px-3 py-1 inline-block  border-2 border-black">
+                      <a 
+                        href="https://open.spotify.com/intl-ja/album/5lHx6pyGglVNXR4eCkdolw" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-lg font-black bg-green-500 text-black px-3 py-1 inline-block border-2 border-black hover:bg-green-400 transition-colors cursor-pointer hover:text-black no-underline"
+                        style={{ color: 'black' }}
+                      >
                         Spotify で配信中
-                      </span>
+                      </a>
                     </div>
                     <div>
                       <span className="inline-flex flex-wrap text-lg font-black bg-yellow-400 text-black px-3 py-1  border-2 border-black">
