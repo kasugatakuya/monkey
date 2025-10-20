@@ -150,13 +150,13 @@ export const MusicList: React.FC<MusicListProps> = ({
 
                   <div className="flex flex-col gap-3 mt-10">
                     <div>
-                      <span className="text-lg font-black bg-black text-white px-3 py-1 inline-block  border-2 border-accent">
+                      <span className="text-lg font-black bg-green-500 text-black px-3 py-1 inline-block  border-2 border-black">
                         Spotify で配信中
                       </span>
                     </div>
                     <div>
                       <span className="inline-flex flex-wrap text-lg font-black bg-yellow-400 text-black px-3 py-1  border-2 border-black">
-                        <div>CD販売中</div>
+                        <div className="mr-3">CD販売中</div>
                         <div>定価：1000円(税込)</div>
                       </span>
                     </div>
