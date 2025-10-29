@@ -27,23 +27,12 @@ export default function Footer() {
           >
             <Image src="/x-icon.webp" width={70} height={70} alt="X" />
           </Link>
-          <Link href="#" className="text-2xl">
-            <Image
-              src="/instagram-img.webp"
-              width={35}
-              height={35}
-              alt="instagram"
-            />
-          </Link>
-          <Link href="#" className="text-2xl px-2">
-            <Image
-              src="/facebook-icon.webp"
-              width={49}
-              height={49}
-              alt="facebook"
-            />
-          </Link>
-          <Link href="#" className="text-2xl">
+          <Link
+            href="https://www.youtube.com/@MONKEY%E3%83%91%E3%83%B3%E3%82%AF%E3%83%90%E3%83%B3%E3%83%89"
+            className="text-2xl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image
               src="/youtube.webp"
               width={35}
@@ -52,6 +41,22 @@ export default function Footer() {
               className="rounded"
             />
           </Link>
+          {/* <Link href="#" className="text-2xl">
+            <Image
+              src="/instagram-img.webp"
+              width={35}
+              height={35}
+              alt="instagram"
+            />
+          </Link> */}
+          {/* <Link href="#" className="text-2xl px-2">
+            <Image
+              src="/facebook-icon.webp"
+              width={49}
+              height={49}
+              alt="facebook"
+            />
+          </Link> */}
         </div>
       </div>
       <p>© MONKEY 2024 - {currentYear}</p>

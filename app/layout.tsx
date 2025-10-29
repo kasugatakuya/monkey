@@ -95,7 +95,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE_CONFIG.url,
     languages: {
-      "ja": SITE_CONFIG.url,
+      ja: SITE_CONFIG.url,
       "x-default": SITE_CONFIG.url,
     },
   },
@@ -152,7 +152,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
         <UpButton />
         <Footer />
-        
+
         {/* 構造化データ (JSON-LD) */}
         <script
           type="application/ld+json"
@@ -160,43 +160,43 @@ export default function RootLayout({ children }: RootLayoutProps) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "MusicGroup",
-              "name": "MONKEY",
-              "alternateName": "モンキー",
-              "url": "https://monkey-mauve-alpha.vercel.app",
-              "genre": ["パンクロック", "ロック", "Punk Rock"],
-              "description": "パンクロックバンドMONKEYの公式サイトです。",
-              "foundingDate": "2020",
-              "foundingLocation": {
+              name: "MONKEY",
+              alternateName: "モンキー",
+              url: "https://monkey-mauve-alpha.vercel.app",
+              genre: ["パンクロック", "ロック", "Punk Rock"],
+              description: "パンクロックバンドMONKEYの公式サイトです。",
+              foundingDate: "2020",
+              foundingLocation: {
                 "@type": "Place",
-                "name": "日本"
+                name: "日本",
               },
-              "member": [
+              member: [
                 {
                   "@type": "Person",
-                  "name": "ギタリスト",
-                  "roleName": "ギター"
+                  name: "ギタリスト",
+                  roleName: "ギター",
                 },
                 {
                   "@type": "Person",
-                  "name": "ベーシスト",
-                  "roleName": "ベース"
+                  name: "ベーシスト",
+                  roleName: "ベース",
                 },
                 {
                   "@type": "Person",
-                  "name": "ドラマー",
-                  "roleName": "ドラム"
-                }
+                  name: "ドラマー",
+                  roleName: "ドラム",
+                },
               ],
-              "sameAs": [
-                "https://twitter.com/monkey_band",
-                "https://www.instagram.com/monkey_band",
-                "https://www.youtube.com/monkey_band",
-                "https://www.facebook.com/monkey_band"
+              sameAs: [
+                "https://x.com/monkey39714",
+                "https://www.youtube.com/@MONKEY%E3%83%91%E3%83%B3%E3%82%AF%E3%83%90%E3%83%B3%E3%83%89",
+                // "https://www.instagram.com/monkey_band",
+                // "https://www.facebook.com/monkey_band",
               ],
-              "logo": {
+              logo: {
                 "@type": "ImageObject",
-                "url": "https://monkey-mauve-alpha.vercel.app/monkey.png"
-              }
+                url: "https://monkey-mauve-alpha.vercel.app/monkey.png",
+              },
             }),
           }}
         />
