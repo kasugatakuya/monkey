@@ -150,14 +150,36 @@ export const MusicList: React.FC<MusicListProps> = ({
 
                   <div className="flex flex-col gap-3 mt-10">
                     <div>
-                      <a 
-                        href="https://open.spotify.com/intl-ja/album/5lHx6pyGglVNXR4eCkdolw" 
-                        target="_blank" 
+                      <a
+                        href="https://open.spotify.com/intl-ja/album/5lHx6pyGglVNXR4eCkdolw"
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="text-lg font-black bg-green-500 text-black px-3 py-1 inline-block border-2 border-black hover:bg-green-400 transition-colors cursor-pointer hover:text-black no-underline"
-                        style={{ color: 'black' }}
+                        style={{ color: "black" }}
                       >
                         Spotify で配信中
+                      </a>
+                    </div>
+                    <div>
+                      <a
+                        href="https://music.apple.com/jp/album/monkey-ep/1845251363"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-lg font-black bg-red-500 text-black px-3 py-1 inline-block border-2 border-black hover:bg-red-400 transition-colors cursor-pointer hover:text-black no-underline"
+                        style={{ color: "black" }}
+                      >
+                        Apple Music で配信中
+                      </a>
+                    </div>
+                    <div>
+                      <a
+                        href="https://music.amazon.co.jp/albums/B0FVKPKBWZ"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-lg font-black bg-blue-500 text-black px-3 py-1 inline-block border-2 border-black hover:bg-blue-400 transition-colors cursor-pointer hover:text-black no-underline"
+                        style={{ color: "black" }}
+                      >
+                        Amazon Music で配信中
                       </a>
                     </div>
                     <div>
