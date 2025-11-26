@@ -190,8 +190,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
               sameAs: [
                 "https://x.com/monkey39714",
                 "https://www.youtube.com/@MONKEY%E3%83%91%E3%83%B3%E3%82%AF%E3%83%90%E3%83%B3%E3%83%89",
-                // "https://www.instagram.com/monkey_band",
-                // "https://www.facebook.com/monkey_band",
+                "https://www.instagram.com/monkey240919?igsh=MWQ2cnpqNDN3dTdhNQ==",
+                "https://www.facebook.com/share/17mKzZRAFu/",
+                "https://monkey8.bandcamp.com/album/monkey",
               ],
               logo: {
                 "@type": "ImageObject",

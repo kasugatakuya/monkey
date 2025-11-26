@@ -18,45 +18,63 @@ export default function Footer() {
         <div className="text-2xl text-distressed text-accent mb-4">
           SNS FOLLOW
         </div>
-        <div className="flex justify-center items-center space-x-8 mb-6">
+        <div className="flex justify-center items-center space-x-5 mb-6">
           <Link
             href="https://x.com/monkey39714"
-            className="text-2xl"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src="/x-icon.webp" width={70} height={70} alt="X" />
+            <Image src="/x-app.webp" width={35} height={35} alt="X" />
           </Link>
           <Link
             href="https://www.youtube.com/@MONKEY%E3%83%91%E3%83%B3%E3%82%AF%E3%83%90%E3%83%B3%E3%83%89"
-            className="text-2xl"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Image
-              src="/youtube.webp"
+              src="/youtube-app.webp"
               width={35}
               height={35}
               alt="youtube"
               className="rounded"
             />
           </Link>
-          {/* <Link href="#" className="text-2xl">
+          <Link
+            href="https://www.instagram.com/monkey240919?igsh=MWQ2cnpqNDN3dTdhNQ=="
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image
-              src="/instagram-img.webp"
+              src="/instagram-app.webp"
               width={35}
               height={35}
               alt="instagram"
             />
-          </Link> */}
-          {/* <Link href="#" className="text-2xl px-2">
+          </Link>
+          <Link
+            href="https://www.facebook.com/share/17mKzZRAFu/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image
-              src="/facebook-icon.webp"
-              width={49}
-              height={49}
+              src="/facebook-app.webp"
+              width={35}
+              height={35}
               alt="facebook"
             />
-          </Link> */}
+          </Link>
+          <Link
+            href="https://monkey8.bandcamp.com/album/monkey"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="/bandcamp-app.webp"
+              width={35}
+              height={35}
+              alt="bandcamp"
+            />
+          </Link>
         </div>
       </div>
       <p>© MONKEY 2024 - {currentYear}</p>
