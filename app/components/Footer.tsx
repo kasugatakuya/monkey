@@ -1,16 +1,8 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Footer() {
-  const [currentYear, setCurrentYear] = useState("");
-
-  useEffect(() => {
-    // クライアントサイドでのみ実行される
-    setCurrentYear(new Date().getFullYear().toString());
-  }, []);
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="text-md py-20 text-center angled-border">
