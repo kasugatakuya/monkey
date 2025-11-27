@@ -48,9 +48,12 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <div style={{ width: '35px', height: '35px', backgroundColor: '#1877f2', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>f</span>
-            </div>
+            <Image
+              src="/instagram-app.png"
+              width={35}
+              height={35}
+              alt="facebook"
+            />
           </Link>
           <Link
             href="https://monkey8.bandcamp.com/album/monkey"
