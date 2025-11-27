@@ -44,7 +44,7 @@ export default function Footer() {
             />
           </Link>
           <Link
-            href="https://www.facebook.com/profile.php?id=61570223039714"
+            href="https://www.facebook.com/people/MONKEY-Band/61575682280398/?rdid=pzl5h8xHLAYWGIOw&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17mKzZRAFu"
             target="_blank"
             rel="noopener noreferrer"
           >
