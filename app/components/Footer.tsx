@@ -48,12 +48,12 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
-              src="/facebook-app.png"
-              width={35}
-              height={35}
+            <img
+              src="/facebook-app.png?v=2"
+              width="35"
+              height="35"
               alt="facebook"
-              style={{ display: 'block', width: '35px', height: '35px' }}
+              style={{ width: '35px', height: '35px', display: 'inline-block' }}
             />
           </Link>
           <Link
