@@ -48,13 +48,9 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img
-              src="/facebook-app.png?v=2"
-              width="35"
-              height="35"
-              alt="facebook"
-              style={{ width: '35px', height: '35px', display: 'inline-block' }}
-            />
+            <div style={{ width: '35px', height: '35px', backgroundColor: '#1877f2', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>f</span>
+            </div>
           </Link>
           <Link
             href="https://monkey8.bandcamp.com/album/monkey"
