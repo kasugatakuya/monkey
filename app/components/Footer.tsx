@@ -31,7 +31,7 @@ export default function Footer() {
               className="rounded"
             />
           </Link>
-          <Link
+          {/* <Link
             href="https://www.instagram.com/monkey240919?igsh=MWQ2cnpqNDN3dTdhNQ=="
             target="_blank"
             rel="noopener noreferrer"
@@ -42,17 +42,18 @@ export default function Footer() {
               height={35}
               alt="instagram"
             />
-          </Link>
+          </Link> */}
           <Link
             href="https://www.facebook.com/share/17mKzZRAFu/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Image
-              src="/instagram-app.png"
+              src="/facebook-app.png"
               width={35}
               height={35}
               alt="facebook"
+              unoptimized
             />
           </Link>
           <Link
