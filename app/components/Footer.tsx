@@ -49,10 +49,10 @@ export default function Footer() {
             rel="noopener noreferrer"
           >
             <Image
-              src="/facebook-app4.webp"
+              src="/facebook-app3.png"
               width={35}
               height={35}
-              alt="facebook"
+              alt="facebook-app"
             />
           </Link>
           {/* <Link
