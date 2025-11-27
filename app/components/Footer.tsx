@@ -44,8 +44,7 @@ export default function Footer() {
             />
           </Link>
           <Link
-            // href="https://www.facebook.com/share/17mKzZRAFu/"
-            href="https://www.instagram.com/monkey240919?igsh=MWQ2cnpqNDN3dTdhNQ=="
+            href="https://www.facebook.com/profile.php?id=61570223039714"
             target="_blank"
             rel="noopener noreferrer"
           >
