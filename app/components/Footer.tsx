@@ -53,7 +53,7 @@ export default function Footer() {
               width={35}
               height={35}
               alt="facebook"
-              priority
+              style={{ display: 'block', width: '35px', height: '35px' }}
             />
           </Link>
           <Link
