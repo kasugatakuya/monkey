@@ -24,7 +24,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src="/x-app.webp" width={35} height={35} alt="X" />
+            <Image src="/x-app.png" width={35} height={35} alt="X" />
           </Link>
           <Link
             href="https://www.youtube.com/@MONKEY%E3%83%91%E3%83%B3%E3%82%AF%E3%83%90%E3%83%B3%E3%83%89"
@@ -32,7 +32,7 @@ export default function Footer() {
             rel="noopener noreferrer"
           >
             <Image
-              src="/youtube-app.webp"
+              src="/youtube-app.png"
               width={35}
               height={35}
               alt="youtube"
@@ -45,7 +45,7 @@ export default function Footer() {
             rel="noopener noreferrer"
           >
             <Image
-              src="/instagram-app.webp"
+              src="/instagram-app.png"
               width={35}
               height={35}
               alt="instagram"
@@ -57,11 +57,10 @@ export default function Footer() {
             rel="noopener noreferrer"
           >
             <Image
-              src="/facebook-app.webp"
+              src="/facebook-app.png"
               width={35}
               height={35}
               alt="facebook"
-              style={{ width: '35px', height: '35px', objectFit: 'contain' }}
               priority
             />
           </Link>
@@ -71,7 +70,7 @@ export default function Footer() {
             rel="noopener noreferrer"
           >
             <Image
-              src="/bandcamp-app.webp"
+              src="/bandcamp-app.png"
               width={35}
               height={35}
               alt="bandcamp"
