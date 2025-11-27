@@ -61,6 +61,8 @@ export default function Footer() {
               width={35}
               height={35}
               alt="facebook"
+              style={{ width: '35px', height: '35px', objectFit: 'contain' }}
+              priority
             />
           </Link>
           <Link
