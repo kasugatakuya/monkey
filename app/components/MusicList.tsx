@@ -195,6 +195,40 @@ export const MusicList: React.FC<MusicListProps> = ({
           </div>
         </div>
       </section>
+
+      {/* ライブ映像 */}
+      <section className="mb-12">
+        <div className="p-2">
+          {/* パンクスタイルのセクションタイトル */}
+          <h2 className="text-3xl font-bold mb-6 border-b-2 border-accent pb-2">
+            ライブ映像
+          </h2>
+
+          <div className="relative group">
+            {/* パンクスタイルの破れた紙風エフェクト */}
+            <div className="absolute -inset-1 bg-accent/20 transform rotate-1 group-hover:rotate-2 transition-transform"></div>
+
+            {/* メインカード */}
+            <div className="relative bg-background border-4 border-accent p-6 transition-all group-hover:transform group-hover:-translate-y-1 group-hover:shadow-[8px_8px_0_rgba(255,45,45,0.5)]">
+              {/* ダメージエフェクトの装飾 */}
+              <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-accent"></div>
+              <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-secondary"></div>
+
+              {/* YouTube iframe */}
+              <div className="relative" style={{ paddingBottom: "56.25%" }}>
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full"
+                  src="https://www.youtube.com/embed/p7fDKHqUZTU"
+                  title="MONKEY ライブ映像"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
