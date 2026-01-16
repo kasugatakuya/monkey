@@ -110,8 +110,7 @@ export const MusicList: React.FC<MusicListProps> = ({
                     <Image
                       src="/monkey-cd.png"
                       alt="MONKEY Release Artwork"
-                      width={615}
-                      height={615}
+                      fill
                       className="object-cover"
                     />
                   </div>
@@ -215,6 +214,16 @@ export const MusicList: React.FC<MusicListProps> = ({
               <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-secondary"></div>
 
               {/* YouTube iframe */}
+              <div className="relative" style={{ paddingBottom: "56.25%" }}>
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full"
+                  src="https://youtu.be/nAyrI6byE-k?si=wSwqk24YAvoLj7bZ"
+                  title="MONKEY ライブ映像"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
+              </div>
               <div className="relative" style={{ paddingBottom: "56.25%" }}>
                 <iframe
                   className="absolute top-0 left-0 w-full h-full"
