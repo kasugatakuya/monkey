@@ -58,7 +58,7 @@ export const MusicList: React.FC<MusicListProps> = ({
                             typeof music["音源URL"] === "string" &&
                             music["音源URL"].includes("soundcloud.com")
                               ? `https://w.soundcloud.com/player/?url=${encodeURIComponent(
-                                  music["音源URL"] as string
+                                  music["音源URL"] as string,
                                 )}&color=%23ff2d2d&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true`
                               : (music["音源URL"] as string)
                           }
@@ -110,8 +110,10 @@ export const MusicList: React.FC<MusicListProps> = ({
                     <Image
                       src="/monkey-cd.png"
                       alt="MONKEY Release Artwork"
-                      fill
                       className="object-cover"
+                      width={500}
+                      height={500}
+                      style={{ width: "100%", height: "100%" }}
                     />
                   </div>
                 </div>
