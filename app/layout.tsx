@@ -157,48 +157,56 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "MusicGroup",
-              name: "MONKEY",
-              alternateName: "モンキー",
-              url: "https://monkey-mauve-alpha.vercel.app",
-              genre: ["パンクロック", "ロック", "Punk Rock"],
-              description: "パンクロックバンドMONKEYの公式サイトです。",
-              foundingDate: "2020",
-              foundingLocation: {
-                "@type": "Place",
-                name: "日本",
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "MONKEY",
+                url: "https://monkey-mauve-alpha.vercel.app",
               },
-              member: [
-                {
-                  "@type": "Person",
-                  name: "ギタリスト",
-                  roleName: "ギター",
+              {
+                "@context": "https://schema.org",
+                "@type": "MusicGroup",
+                name: "MONKEY",
+                alternateName: "モンキー",
+                url: "https://monkey-mauve-alpha.vercel.app",
+                genre: ["パンクロック", "ロック", "Punk Rock"],
+                description: "パンクロックバンドMONKEYの公式サイトです。",
+                foundingDate: "2020",
+                foundingLocation: {
+                  "@type": "Place",
+                  name: "日本",
                 },
-                {
-                  "@type": "Person",
-                  name: "ベーシスト",
-                  roleName: "ベース",
+                member: [
+                  {
+                    "@type": "Person",
+                    name: "ギタリスト",
+                    roleName: "ギター",
+                  },
+                  {
+                    "@type": "Person",
+                    name: "ベーシスト",
+                    roleName: "ベース",
+                  },
+                  {
+                    "@type": "Person",
+                    name: "ドラマー",
+                    roleName: "ドラム",
+                  },
+                ],
+                sameAs: [
+                  "https://x.com/monkey39714",
+                  "https://www.youtube.com/@MONKEY%E3%83%91%E3%83%B3%E3%82%AF%E3%83%90%E3%83%B3%E3%83%89",
+                  "https://www.instagram.com/monkey240919?igsh=MWQ2cnpqNDN3dTdhNQ==",
+                  "https://www.facebook.com/share/17mKzZRAFu/",
+                  "https://monkey8.bandcamp.com/album/monkey",
+                ],
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://monkey-mauve-alpha.vercel.app/monkey.png",
                 },
-                {
-                  "@type": "Person",
-                  name: "ドラマー",
-                  roleName: "ドラム",
-                },
-              ],
-              sameAs: [
-                "https://x.com/monkey39714",
-                "https://www.youtube.com/@MONKEY%E3%83%91%E3%83%B3%E3%82%AF%E3%83%90%E3%83%B3%E3%83%89",
-                "https://www.instagram.com/monkey240919?igsh=MWQ2cnpqNDN3dTdhNQ==",
-                "https://www.facebook.com/share/17mKzZRAFu/",
-                "https://monkey8.bandcamp.com/album/monkey",
-              ],
-              logo: {
-                "@type": "ImageObject",
-                url: "https://monkey-mauve-alpha.vercel.app/monkey.png",
               },
-            }),
+            ]),
           }}
         />
       </body>
