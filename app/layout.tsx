@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
@@ -152,6 +153,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
         <UpButton />
         <Footer />
+        <SpeedInsights />
 
         {/* 構造化データ (JSON-LD) */}
         <script
