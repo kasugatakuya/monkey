@@ -6,6 +6,7 @@ import { TitleSection } from "@/app/components/TitleSection";
 import { NewsList } from "@/app/components/NewsList";
 import { LiveList } from "@/app/components/LiveList";
 import { MusicList } from "@/app/components/MusicList";
+import { YouTubeList } from "@/app/components/YouTubeList";
 
 // キャッシュを無効化し、毎回のリクエストで再検証
 export const revalidate = 0;
@@ -29,6 +30,7 @@ export default async function Top() {
   const liveData = allData.filter((item) => item._sheetType === "live");
   const memberData = allData.filter((item) => item._sheetType === "member");
   const musicData = allData.filter((item) => item._sheetType === "music");
+  const youtubeData = allData.filter((item) => item._sheetType === "youtube");
 
   return (
     <main className="mx-5 md:mx-20">
@@ -56,6 +58,9 @@ export default async function Top() {
           showViewAllButton={true} // 「全ての楽曲」ボタンを表示
         />
       )}
+
+      {/* ライブ映像セクション - YouTubeListコンポーネントを使用 */}
+      {youtubeData.length > 0 && <YouTubeList youtubeData={youtubeData} />}
 
       {/* ライブ情報セクション - LiveListコンポーネントを使用 */}
       {liveData.length > 0 && (

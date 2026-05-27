@@ -46,8 +46,14 @@ interface MusicItem extends BaseItem {
   説明?: string;
 }
 
+interface YouTubeItem extends BaseItem {
+  _sheetType: "youtube";
+  タイトル: string;
+  動画URL: string;
+}
+
 // すべてのデータタイプを結合
-export type SheetItem = NewsItem | LiveItem | MemberItem | MusicItem;
+export type SheetItem = NewsItem | LiveItem | MemberItem | MusicItem | YouTubeItem;
 
 // Google Sheets APIのクライアントを初期化する関数
 export async function getGoogleSheetsClient() {
@@ -128,7 +134,7 @@ export async function getAllSheetData(
 // スプレッドシートの種類を判定する関数
 function determineSheetType(
   headers: string[]
-): "news" | "live" | "member" | "music" {
+): "news" | "live" | "member" | "music" | "youtube" {
   // ニュース形式（日付、タイトル、内容などのヘッダーがある）
   if (
     headers.includes("日付") &&
@@ -155,6 +161,11 @@ function determineSheetType(
   // 楽曲情報形式（曲名、音源URLなどのヘッダーがある）
   if (headers.includes("曲名") && headers.includes("音源URL")) {
     return "music";
+  }
+
+  // YouTube動画形式（タイトル、動画URLのヘッダーがある）
+  if (headers.includes("タイトル") && headers.includes("動画URL")) {
+    return "youtube";
   }
 
   // デフォルトではnewsを返す（unknownの代わり）
